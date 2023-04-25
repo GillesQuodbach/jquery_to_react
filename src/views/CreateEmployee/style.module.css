@@ -16,3 +16,8 @@
 .save_button {
 margin-top: 30px;
 }
+
+legend {
+color: rgba(0,0,0,0.6)
+
+}
