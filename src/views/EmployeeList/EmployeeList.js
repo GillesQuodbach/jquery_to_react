@@ -1,7 +1,7 @@
 import s from "./style.module.css"
 
 import React from 'react';
-import MuiTable from "../../components/Table/MuiTable";
+import MuiTable from "../../components/Table/EmployeesTable";
 
 function EmployeeList(props) {
     return (
