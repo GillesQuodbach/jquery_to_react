@@ -1,10 +1,16 @@
 import s from "./style.module.css";
-import {Stack, TextField} from "@mui/material";
+import { TextField } from "@mui/material";
+import Input from "@mui/material/Input";
 
 function FormInput(props) {
   return (
     <div className={s.formImput_container}>
-      <TextField label={props.label}/>
+      <TextField
+        id={props.name}
+        name={props.name}
+        label={props.label}
+        variant={"outlined"}
+      />
     </div>
   );
 }

@@ -1,7 +1,10 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {configureStore} from "@reduxjs/toolkit";
+import {employeesSlice} from "./employees/employees-slice";
 
 const store = configureStore({
-  reducer: {},
+    reducer: {
+        employees: employeesSlice.reducer
+    },
 });
 
-export { store };
+export {store};
