@@ -1,22 +1,26 @@
 import s from "./style.module.css";
-import dayjs from "dayjs";
+
 import FormInput from "../../components/FormInput/FormInput";
 import {
   Button,
   Box,
-  FormGroup,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
 } from "@mui/material";
-import { departmentList } from "../../utils/department";
-import { states } from "../../utils/states";
 import Modal from "../../components/Modal/Modal";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DatePicker } from "@mui/x-date-pickers";
+import { useSelector } from "react-redux";
 
 function CreateEmployee(props) {
+  const statesList = useSelector((store) => store.states);
+  // console.log("****state****", statesList);
+
+  const departmentList = useSelector((store) => store.departments);
+  // console.log("****dept****", departmentList);
+
   //State des datepickers
   const [startDate, setStartDate] = useState(null);
   const [dateOfBirth, setDateOfBirth] = useState(null);
@@ -105,26 +109,15 @@ function CreateEmployee(props) {
                 label="Sate"
                 onChange={handleSelectState}
               >
-                {states?.map((item) => (
+                {statesList?.map((item) => (
                   <MenuItem key={item.name} value={item.name}>
                     {item.name}
                   </MenuItem>
                 ))}
               </Select>
             </FormControl>
-            {/* <SelectMenuInput
-              name={"state"}
-              title="state"
-              datas={states}
-              onChange={handleState}
-            /> */}
             <FormInput name={"zip_code"} label={"Zip Code"} />
           </Box>
-          {/* <SelectMenuInput
-            name={"department"}
-            title="department"
-            datas={department}
-          /> */}
           <FormControl sx={{ width: 300 }}>
             <InputLabel id="select_department_label">Department</InputLabel>
             <Select
