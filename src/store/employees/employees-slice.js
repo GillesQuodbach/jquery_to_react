@@ -126,4 +126,14 @@ const initialState = [
 export const employeesSlice = createSlice({
   name: "employeesSlice",
   initialState: initialState,
+  reducers: {
+    addEmployeeToTheStore: (currentSlice, action) => {
+      currentSlice.push(action.payload);
+      console.log("addEmployee");
+      console.log(action);
+    },
+  },
 });
+
+const { addEmployeeToTheStore } = employeesSlice.actions;
+export { addEmployeeToTheStore };

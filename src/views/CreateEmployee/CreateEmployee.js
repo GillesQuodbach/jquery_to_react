@@ -1,5 +1,5 @@
 import s from "./style.module.css";
-
+import { addEmployeeToTheStore } from "../../store/employees/employees-slice";
 import FormInput from "../../components/FormInput/FormInput";
 import {
   Button,
@@ -8,13 +8,17 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  TextField,
 } from "@mui/material";
 import Modal from "../../components/Modal/Modal";
 import { useState } from "react";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useSelector } from "react-redux";
-
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { useDispatch } from "react-redux";
 function CreateEmployee(props) {
+  const dispatch = useDispatch();
   const statesList = useSelector((store) => store.states);
   // console.log("****state****", statesList);
 
@@ -27,32 +31,41 @@ function CreateEmployee(props) {
   const [state, setState] = useState("");
   const [department, setDepartment] = useState("");
 
+  const [employee, setEmployee] = useState({
+    first_name: "",
+    last_name: "",
+    start_date: "",
+    department: "",
+    date_of_birth: "",
+    street: "",
+    city: "",
+    state: "",
+    zip_code: "",
+  });
+
+  console.log(employee);
   //Modal setting
   const [openModal, setOpenModal] = useState(false);
+
   const addEmployee = (e) => {
     e.preventDefault();
     setOpenModal(true);
-    const form = e.target;
-
     //Employee infos
-    const formData = new FormData(form);
-    const firstName = formData.get("first_name");
-    const lastName = formData.get("last_name");
-    const street = formData.get("street");
-    const city = formData.get("city");
-    const zipCode = formData.get("zip_code");
+    const form = e.currentTarget;
+    // console.log(form);
 
-    console.log(
-      firstName,
-      lastName,
-      dateOfBirth?.$d,
-      startDate?.$d,
-      street,
-      city,
-      state,
-      zipCode,
-      department
-    );
+    const formData = new FormData(form);
+    let formObject = Object.fromEntries(formData.entries());
+    console.log(formObject);
+    employee.city = formObject.city;
+    employee.department = formObject.department;
+    employee.first_name = formObject.first_name;
+    employee.last_name = formObject.last_name;
+    employee.state = formObject.state;
+    employee.street = formObject.street;
+    employee.zip_code = formObject.zip_code;
+
+    dispatch(addEmployeeToTheStore(employee));
   };
 
   const handleSelectState = (e) => {
@@ -64,6 +77,30 @@ function CreateEmployee(props) {
     // console.log(e.target.value);
   };
 
+  const handleDateOfBirth = (newValue) => {
+    console.log(newValue);
+
+    const day = newValue?.$D;
+    const month = newValue?.$M + 1;
+    const year = newValue?.$y;
+    const formatedDate = `${day}/${month}/${year}`;
+    // console.log(formatedDate);
+    setDateOfBirth(newValue);
+    employee.date_of_birth = formatedDate;
+  };
+
+  const handleStartDate = (newValue) => {
+    console.log(newValue);
+
+    const day = newValue?.$D;
+    const month = newValue?.$M + 1;
+    const year = newValue?.$y;
+    const formatedDate = `${day}/${month}/${year}`;
+    console.log(formatedDate);
+    setStartDate(newValue);
+    employee.start_date = formatedDate;
+  };
+
   return (
     <>
       <Box className={s.create_employee_container}>
@@ -72,21 +109,23 @@ function CreateEmployee(props) {
         <form onSubmit={addEmployee}>
           <FormInput name={"first_name"} label={"First Name"} />
           <FormInput name={"last_name"} label={"Last Name"} />
-          <DatePicker
-            label={"Date of Birth"}
-            name={"date_of_birth"}
-            title={"Date of Birth"}
-            value={dateOfBirth}
-            onChange={(newDate) => setDateOfBirth(newDate)}
-          />
-          <DatePicker
-            label={"Start Date"}
-            name={"start_date"}
-            title={"Start Date"}
-            value={startDate}
-            onChange={(newDate) => setStartDate(newDate)}
-          />
-
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              name="birthday"
+              label="Date of Birth"
+              inputFormat={"dd-MM-yyyy"}
+              value={dateOfBirth}
+              onChange={handleDateOfBirth}
+            />
+          </LocalizationProvider>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              label="Start Date"
+              inputFormat={"dd-MM-yyyy"}
+              value={startDate}
+              onChange={handleStartDate}
+            />
+          </LocalizationProvider>
           <Box
             component={"fieldset"}
             className={s.adress_fieldset}
@@ -103,6 +142,7 @@ function CreateEmployee(props) {
             <FormControl>
               <InputLabel id="select_state_label">State</InputLabel>
               <Select
+                name={"state"}
                 labelId="select_state_label"
                 id="select_state"
                 defaultValue={""}
@@ -121,6 +161,7 @@ function CreateEmployee(props) {
           <FormControl sx={{ width: 300 }}>
             <InputLabel id="select_department_label">Department</InputLabel>
             <Select
+              name="department"
               labelId="select_department_label"
               id="select_department"
               defaultValue={""}
