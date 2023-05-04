@@ -13,7 +13,9 @@ import Searchbar from "../Searchbar/Searchbar";
 import { useSelector } from "react-redux";
 
 export default function EmployeesTable() {
-  const originalRows = useSelector((store) => store.employees);
+  const originalRows = useSelector(
+    (store) => store.persistedReducers.employees
+  );
   console.log("***store***", originalRows);
 
   const [rows, setRows] = useState(originalRows);

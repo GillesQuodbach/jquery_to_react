@@ -1,23 +1,40 @@
+/* color 
+#93ad18
+#6d840f
+#333333
+#666a86
+#95b8d1
+
+*/
+
+.legend_title {
+  color: #fff;
+}
+
 .create_employee_container {
-    max-width: 300px;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.create_employee {
-    display: flex;;
+.create_employee_title {
+  color: #333333;
 }
 
-#create_employee {
-    display: flex;
-    flex-direction: column;
-    gap:10px
+.form_container {
+  margin: 0;
+  padding: 25px;
+  background-color: #6d840f;
+  width: min-content;
+  border-radius: 20px;
+  box-shadow: 2px 2px 2px #000;
 }
 
-.save_button {
-margin-top: 30px;
+.myDatePicker fieldset.MuiOutlinedInput-notchedOutline {
+  border-color: green;
 }
 
-legend {
-color: rgba(0,0,0,0.6)
-
+.myDatePicker .Mui-focused fieldset.MuiOutlinedInput-notchedOutline {
+  border-color: red;
 }

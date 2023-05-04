@@ -11,12 +11,16 @@ function Header() {
       {currentLocation === "/list" ? (
         <>
           <h1 className={s.header_title}>Current Employees</h1>
-          <NavLink to="/">Home</NavLink>
+          <NavLink className={s.header_link} to="/">
+            Home
+          </NavLink>
         </>
       ) : (
         <>
           <h1 className={s.header_title}>HRnet</h1>
-          <NavLink to="/list">View Current Employees</NavLink>
+          <NavLink className={s.header_link} to="/list">
+            View Current Employees
+          </NavLink>
         </>
       )}
     </div>
