@@ -19,22 +19,21 @@
 }
 
 .create_employee_title {
-  color: #333333;
+  color: #fff;
+  font-weight: 500;
+  background-color: #725d68;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 10px 10px 0px 0px;
 }
 
 .form_container {
   margin: 0;
   padding: 25px;
-  background-color: #6d840f;
+  background-color: #725d68;
   width: min-content;
   border-radius: 20px;
   box-shadow: 2px 2px 2px #000;
-}
-
-.myDatePicker fieldset.MuiOutlinedInput-notchedOutline {
-  border-color: green;
-}
-
-.myDatePicker .Mui-focused fieldset.MuiOutlinedInput-notchedOutline {
-  border-color: red;
 }

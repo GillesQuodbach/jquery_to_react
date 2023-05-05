@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import s from "./style.module.css";
 import { NavLink, useLocation } from "react-router-dom";
+import { Button, colors } from "@mui/material";
 
 function Header() {
   const location = useLocation();
@@ -11,16 +12,31 @@ function Header() {
       {currentLocation === "/list" ? (
         <>
           <h1 className={s.header_title}>Current Employees</h1>
-          <NavLink className={s.header_link} to="/">
-            Home
-          </NavLink>
+
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#333333",
+            }}
+          >
+            <NavLink className={s.header_link} to="/">
+              Home
+            </NavLink>
+          </Button>
         </>
       ) : (
         <>
           <h1 className={s.header_title}>HRnet</h1>
-          <NavLink className={s.header_link} to="/list">
-            View Current Employees
-          </NavLink>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#333333",
+            }}
+          >
+            <NavLink className={s.header_link} to="/list">
+              View Current Employees
+            </NavLink>
+          </Button>
         </>
       )}
     </div>

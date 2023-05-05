@@ -105,13 +105,31 @@ export default function EmployeesTable() {
 
   return (
     <>
-      <TableContainer component={Paper}>
+      <TableContainer
+        sx={{
+          width: "max-content",
+          marginRight: "auto",
+          marginLeft: "auto",
+          backgroundColor: "#fff",
+          boxShadow: "2px 2px 2px #000",
+        }}
+        component={Paper}
+      >
         <Searchbar placeholder="Search..." onChange={inputSearchHandler} />
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table
+          sx={{
+            backgroundColor: "#725d68",
+          }}
+          aria-label="simple table"
+        >
           <TableHead>
             <TableRow>
               <TableCell key={"first_name"}>
                 <TableSortLabel
+                  sx={{
+                    color: "#000",
+                    fontSize: "1.1rem",
+                  }}
                   active={valueToOrderBy === "first_name"}
                   direction={
                     valueToOrderBy === "first_name" ? orderDirection : "asc"
@@ -123,6 +141,10 @@ export default function EmployeesTable() {
               </TableCell>
               <TableCell key={"last_name"} align="right">
                 <TableSortLabel
+                  sx={{
+                    color: "#000",
+                    fontSize: "1.1rem",
+                  }}
                   active={valueToOrderBy === "last_name"}
                   direction={
                     valueToOrderBy === "last_name" ? orderDirection : "asc"
@@ -134,6 +156,10 @@ export default function EmployeesTable() {
               </TableCell>
               <TableCell align="right">
                 <TableSortLabel
+                  sx={{
+                    color: "#000",
+                    fontSize: "1.1rem",
+                  }}
                   active={valueToOrderBy === "start_date"}
                   direction={
                     valueToOrderBy === "start_date" ? orderDirection : "asc"
@@ -145,6 +171,10 @@ export default function EmployeesTable() {
               </TableCell>
               <TableCell align="right">
                 <TableSortLabel
+                  sx={{
+                    color: "#000",
+                    fontSize: "1.1rem",
+                  }}
                   active={valueToOrderBy === "department"}
                   direction={
                     valueToOrderBy === "department" ? orderDirection : "asc"
@@ -156,6 +186,10 @@ export default function EmployeesTable() {
               </TableCell>
               <TableCell align="right">
                 <TableSortLabel
+                  sx={{
+                    color: "#000",
+                    fontSize: "1.1rem",
+                  }}
                   active={valueToOrderBy === "date_of_birth"}
                   direction={
                     valueToOrderBy === "date_of_birth" ? orderDirection : "asc"
@@ -167,6 +201,10 @@ export default function EmployeesTable() {
               </TableCell>
               <TableCell align="right">
                 <TableSortLabel
+                  sx={{
+                    color: "#000",
+                    fontSize: "1.1rem",
+                  }}
                   active={valueToOrderBy === "street"}
                   direction={
                     valueToOrderBy === "street" ? orderDirection : "asc"
@@ -178,6 +216,10 @@ export default function EmployeesTable() {
               </TableCell>
               <TableCell align="right">
                 <TableSortLabel
+                  sx={{
+                    color: "#000",
+                    fontSize: "1.1rem",
+                  }}
                   active={valueToOrderBy === "city"}
                   direction={valueToOrderBy === "city" ? orderDirection : "asc"}
                   onClick={createSortHandler("city")}
@@ -187,6 +229,10 @@ export default function EmployeesTable() {
               </TableCell>
               <TableCell align="right">
                 <TableSortLabel
+                  sx={{
+                    color: "#000",
+                    fontSize: "1.1rem",
+                  }}
                   active={valueToOrderBy === "state"}
                   direction={
                     valueToOrderBy === "state" ? orderDirection : "asc"
@@ -198,6 +244,10 @@ export default function EmployeesTable() {
               </TableCell>
               <TableCell align="right">
                 <TableSortLabel
+                  sx={{
+                    color: "#000",
+                    fontSize: "1.1rem",
+                  }}
                   active={valueToOrderBy === "zip_code"}
                   direction={
                     valueToOrderBy === "zip_code" ? orderDirection : "asc"
@@ -225,34 +275,116 @@ export default function EmployeesTable() {
                 .map((person, index) => (
                   <TableRow
                     key={index}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    sx={{
+                      "&:last-child td, &:last-child th": { border: 0 },
+                    }}
                   >
-                    <TableCell component="th" scope="row">
+                    <TableCell
+                      sx={{
+                        color: "#fff",
+                        fontWeight: "500",
+                        fontSize: "1rem",
+                      }}
+                      component="th"
+                      scope="row"
+                    >
                       {person.first_name}
                     </TableCell>
-                    <TableCell align="right">{person.last_name}</TableCell>
-                    <TableCell align="right">{person.start_date}</TableCell>
-                    <TableCell align="right">{person.department}</TableCell>
-                    <TableCell align="right">{person.date_of_birth}</TableCell>
-                    <TableCell align="right">{person.street}</TableCell>
-                    <TableCell align="right">{person.city}</TableCell>
-                    <TableCell align="right">{person.state}</TableCell>
-                    <TableCell align="right">{person.zip_code}</TableCell>
+                    <TableCell
+                      sx={{
+                        color: "#fff",
+                        fontWeight: "500",
+                        fontSize: "1rem",
+                      }}
+                      align="right"
+                    >
+                      {person.last_name}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        color: "#fff",
+                        fontWeight: "500",
+                        fontSize: "1rem",
+                      }}
+                      align="right"
+                    >
+                      {person.start_date}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        color: "#fff",
+                        fontWeight: "500",
+                        fontSize: "1rem",
+                      }}
+                      align="right"
+                    >
+                      {person.department}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        color: "#fff",
+                        fontWeight: "500",
+                        fontSize: "1rem",
+                      }}
+                      align="right"
+                    >
+                      {person.date_of_birth}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        color: "#fff",
+                        fontWeight: "500",
+                        fontSize: "1rem",
+                      }}
+                      align="right"
+                    >
+                      {person.street}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        color: "#fff",
+                        fontWeight: "500",
+                        fontSize: "1rem",
+                      }}
+                      align="right"
+                    >
+                      {person.city}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        color: "#fff",
+                        fontWeight: "500",
+                        fontSize: "1rem",
+                      }}
+                      align="right"
+                    >
+                      {person.state}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        color: "#fff",
+                        fontWeight: "500",
+                        fontSize: "1rem",
+                      }}
+                      align="right"
+                    >
+                      {person.zip_code}
+                    </TableCell>
                   </TableRow>
                 ))}
             </TableBody>
           )}
         </Table>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
     </>
   );
 }
