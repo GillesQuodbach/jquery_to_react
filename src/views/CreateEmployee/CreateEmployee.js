@@ -125,16 +125,37 @@ function CreateEmployee(props) {
   const StyledDatePicker = styled(DatePicker)(({ theme }) => ({
     "& .MuiOutlinedInput-root": {
       "&:hover fieldset": {
-        borderColor: theme.palette.secondary.main,
+        borderColor: "#000",
       },
       "&.Mui-focused fieldset": {
-        borderColor: theme.palette.secondary.main,
+        borderColor: "#000",
         borderWidth: 2,
       },
     },
     "& .MuiIconButton-root": {
       "&:hover": {
-        color: theme.palette.secondary.main,
+        color: "#000",
+      },
+    },
+    "& .MuiInputLabel-shrink": {
+      color: "#000",
+      fontWeight: 500,
+    },
+  }));
+
+  const StyledSelectTextfield = styled(TextField)(({ theme }) => ({
+    "& .MuiOutlinedInput-root": {
+      "&:hover fieldset": {
+        borderColor: "#000",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#000",
+        borderWidth: 2,
+      },
+    },
+    "& .MuiIconButton-root": {
+      "&:hover": {
+        color: "#000",
       },
     },
   }));
@@ -154,7 +175,7 @@ function CreateEmployee(props) {
           />
           <FormInput name={"last_name"} label={"Last Name"} />
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            {/* <DatePicker
+            <StyledDatePicker
               name="birthday"
               label="Date of Birth"
               inputFormat={"dd-MM-yyyy"}
@@ -166,11 +187,10 @@ function CreateEmployee(props) {
                 border: "1px solid #33333",
                 backgroundColor: "#fff",
               }}
-            /> */}
-            <StyledDatePicker label="Date picker" />
+            />
           </LocalizationProvider>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
+            <StyledDatePicker
               label="Start Date"
               inputFormat={"dd-MM-yyyy"}
               value={startDate}
@@ -180,6 +200,12 @@ function CreateEmployee(props) {
                 borderRadius: "5px",
                 border: "1px solid #33333",
                 backgroundColor: "#fff",
+                "Start Date": {
+                  color: "#fff",
+                  "&.Mui-focused": {
+                    color: "#fff",
+                  },
+                },
               }}
             />
           </LocalizationProvider>
@@ -196,7 +222,7 @@ function CreateEmployee(props) {
             <FormInput name={"street"} label={"Street"} />
             <FormInput name={"city"} label={"City"} />
             <FormControl sx={{ width: 250 }}>
-              <TextField
+              <StyledSelectTextfield
                 select
                 name={"state"}
                 id="select_state"
@@ -244,7 +270,7 @@ function CreateEmployee(props) {
                     {item.name}
                   </MenuItem>
                 ))}
-              </TextField>
+              </StyledSelectTextfield>
             </FormControl>
             <FormInput name={"zip_code"} label={"Zip Code"} />
           </Box>
