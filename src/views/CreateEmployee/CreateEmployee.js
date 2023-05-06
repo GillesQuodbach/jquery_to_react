@@ -20,6 +20,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useDispatch } from "react-redux";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { styled } from "@mui/material/styles";
+import { useForm } from "react-hook-form";
+import { DevTool } from "@hookform/devtools";
 
 function CreateEmployee(props) {
   const dispatch = useDispatch();
@@ -160,6 +162,11 @@ function CreateEmployee(props) {
     },
   }));
 
+  // appel de UseForm
+  const form = useForm();
+  // tout ce qui va être "suivi" par UseForm
+  const { register, control } = form;
+
   return (
     <>
       <Box className={s.create_employee_container}>
@@ -171,12 +178,18 @@ function CreateEmployee(props) {
           <FormInput
             className={s.test_input}
             name={"first_name"}
+            // {...register("first_name",)}
             label={"First Name"}
           />
-          <FormInput name={"last_name"} label={"Last Name"} />
+          <FormInput
+            // name={"last_name"}
+            {...register("last_name")}
+            label={"Last Name"}
+          />
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <StyledDatePicker
-              name="birthday"
+              // name="birthday"
+              {...register("birthday")}
               label="Date of Birth"
               inputFormat={"dd-MM-yyyy"}
               value={dateOfBirth}
@@ -191,6 +204,7 @@ function CreateEmployee(props) {
           </LocalizationProvider>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <StyledDatePicker
+              {...register("startDate")}
               label="Start Date"
               inputFormat={"dd-MM-yyyy"}
               value={startDate}
@@ -219,12 +233,21 @@ function CreateEmployee(props) {
             }}
           >
             <legend className={s.legend_title}>Adress</legend>
-            <FormInput name={"street"} label={"Street"} />
-            <FormInput name={"city"} label={"City"} />
+            <FormInput
+              // name={"street"}
+              {...register("street")}
+              label={"Street"}
+            />
+            <FormInput
+              // name={"city"}
+              {...register("city")}
+              label={"City"}
+            />
             <FormControl sx={{ width: 250 }}>
               <StyledSelectTextfield
                 select
-                name={"state"}
+                // name={"state"}
+                {...register("state")}
                 id="select_state"
                 defaultValue={""}
                 label="Sate"
@@ -272,12 +295,17 @@ function CreateEmployee(props) {
                 ))}
               </StyledSelectTextfield>
             </FormControl>
-            <FormInput name={"zip_code"} label={"Zip Code"} />
+            <FormInput
+              // name={"zip_code"}
+              {...register("zip_code")}
+              label={"Zip Code"}
+            />
           </Box>
           <FormControl sx={{ width: 300 }}>
             <TextField
               select
-              name="department"
+              // name="department"
+              {...register("department")}
               id="select_department"
               defaultValue={""}
               label="Department"
@@ -336,6 +364,7 @@ function CreateEmployee(props) {
             </Button>
           </Box>
         </form>
+        <DevTool control={control} />
       </Box>
       {openModal && <Modal closeModal={setOpenModal} />}
     </>
