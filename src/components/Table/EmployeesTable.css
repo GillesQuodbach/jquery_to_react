@@ -46,6 +46,22 @@ tbody td:hover:before {
   align-items: center;
 }
 
+.pagination_pages_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.pagination_go_to_page {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.pagination_go_to_page input {
+  color: #fff !important;
+}
+
 .pagination_container button {
   background-color: #333333;
   opacity: 0.9;
@@ -62,4 +78,9 @@ tbody td:hover:before {
 .pagination_button_container {
   display: flex;
   gap: 10px;
+}
+
+.pagination_select_page_dropdown {
+  color: #fff !important;
+  border-color: #fff !important;
 }

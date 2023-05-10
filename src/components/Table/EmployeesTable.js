@@ -19,6 +19,12 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import Input from "@mui/material/Input";
 
 export const EmployeesTable = () => {
   const employeesList = useSelector(
@@ -104,7 +110,13 @@ export const EmployeesTable = () => {
           <span className="pagination_pipe">|</span>
           <span className="pagination_go_to_page">
             Go to page:{" "}
-            <input
+            <TextField
+              size="small"
+              sx={{
+                backgroundColor: "#333333",
+                color: "#fff",
+                borderRadius: "4px",
+              }}
               type="number"
               defaultValue={pageIndex + 1}
               onChange={(e) => {
@@ -113,25 +125,31 @@ export const EmployeesTable = () => {
                   : 0;
                 gotoPage(pageNumber);
               }}
-              style={{ width: "50px" }}
+              style={{
+                width: "70px",
+                marginLeft: "10px",
+              }}
             />
           </span>
         </div>
         <div className="pagination_select_page_dropdown_container">
-          <select
+          <Select
+            sx={{ backgroundColor: "#333333" }}
+            size="small"
             className="pagination_select_page_dropdown"
             value={pageSize}
             onChange={(e) => setPageSize(Number(e.target.value))}
           >
             {[10, 25, 50].map((pageSize) => (
-              <option key={pageSize} value={pageSize}>
+              <MenuItem key={pageSize} value={pageSize}>
                 Show {pageSize}
-              </option>
+              </MenuItem>
             ))}
-          </select>
+          </Select>
         </div>
         <div className="pagination_button_container">
           <Button
+            size="small"
             variant="contained"
             className="pagination_first_page"
             onClick={() => gotoPage(0)}
@@ -140,6 +158,7 @@ export const EmployeesTable = () => {
             {"<<"}
           </Button>
           <Button
+            size="small"
             variant="contained"
             className="pagination_previous_page"
             onClick={() => previousPage()}
@@ -148,6 +167,7 @@ export const EmployeesTable = () => {
             Previous
           </Button>
           <Button
+            size="small"
             variant="contained"
             className="pagination_next_page"
             onClick={() => nextPage()}
@@ -156,6 +176,7 @@ export const EmployeesTable = () => {
             Next
           </Button>
           <Button
+            size="small"
             variant="contained"
             className="pagination_last_page"
             onClick={() => gotoPage(pageCount - 1)}
