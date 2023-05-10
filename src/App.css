@@ -1,5 +1,13 @@
-.App {
-  background-color: #a8b4a5;
+#root {
   width: 100vw;
-  height: 110vh;
+  height: 100vh;
+}
+
+.App {
+  background: -webkit-linear-gradient(45deg, #49a09d, #5f2c82);
+  background: linear-gradient(45deg, #49a09d, #5f2c82);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

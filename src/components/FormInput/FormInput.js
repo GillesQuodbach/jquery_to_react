@@ -2,10 +2,15 @@ import s from "./style.module.css";
 import { TextField } from "@mui/material";
 import Input from "@mui/material/Input";
 import { inputLabelClasses } from "@mui/material/InputLabel";
+import { useForm } from "react-hook-form";
 
 function FormInput(props) {
+  // appel de UseForm
+  const form = useForm();
+  const { register, control } = form;
   return (
     <TextField
+      {...register(props.name)}
       sx={{
         mb: 2,
         borderRadius: "5px",
@@ -14,7 +19,7 @@ function FormInput(props) {
       }}
       className={s.input_field}
       id={props.name}
-      name={props.name}
+      // name={props.name}
       label={props.label}
       variant={"outlined"}
       //customize label
