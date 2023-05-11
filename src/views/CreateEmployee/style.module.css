@@ -27,4 +27,45 @@
   width: min-content;
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.form_container label {
+  margin-bottom: 5px;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.form_container legend {
+  margin-bottom: 5px;
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 300;
+}
+
+.form_container fieldset {
+  border: 2px solid #fff;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.form_container input,
+select {
+  margin-bottom: 10px;
+}
+
+.form_container button {
+  align-self: center;
+  margin-top: 15px;
+}
+
+.input_error_message {
+  color: red;
+  font-weight: 500;
+  font-size: 0.8rem;
+  margin-top: 0;
 }

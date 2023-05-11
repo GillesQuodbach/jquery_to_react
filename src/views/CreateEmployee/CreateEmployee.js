@@ -1,6 +1,6 @@
 import s from "./style.module.css";
+import { v4 as uuidv4 } from "uuid";
 import { addEmployeeToTheStore } from "../../store/employees/employees-slice";
-import FormInput from "../../components/FormInput/FormInput";
 import {
   Button,
   Box,
@@ -16,43 +16,16 @@ import { useState } from "react";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useSelector } from "react-redux";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { useDispatch } from "react-redux";
 import { inputLabelClasses } from "@mui/material/InputLabel";
-import { styled } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
+import { format } from "date-fns";
 
 function CreateEmployee(props) {
-  const dispatch = useDispatch();
-  const statesList = useSelector((store) => store.persistedReducers.states);
-  // console.log("****state****", statesList);
-
-  const departmentList = useSelector(
-    (store) => store.persistedReducers.departments
-  );
-  // console.log("****dept****", departmentList);
-
-  const employeeId = useSelector((store) => store.persistedReducers.employees);
-  console.log(employeeId);
-
-  const employeesIdArray = [];
-  const allEmployeesIdInStore = employeeId?.forEach((item) => {
-    employeesIdArray.push(item.id);
-
-    // return employeesIdArray;
-  });
-  console.log(employeesIdArray);
-  const actualMaxId = Math.max(...employeesIdArray);
-  console.log(actualMaxId);
-
-  //State des datepickers
-  const [startDate, setStartDate] = useState(null);
-  const [dateOfBirth, setDateOfBirth] = useState(null);
-  const [state, setState] = useState("");
-  const [department, setDepartment] = useState("");
-
-  const [employee, setEmployee] = useState({
+  const [newEmployee, setNewEmployee] = useState({
     id: "",
     first_name: "",
     last_name: "",
@@ -65,307 +38,180 @@ function CreateEmployee(props) {
     zip_code: "",
   });
 
+  const form = useForm();
+  const { register, control, handleSubmit, formState, reset } = form;
+  const { errors } = formState;
+
+  const dispatch = useDispatch();
+  const statesList = useSelector((store) => store.persistedReducers.states);
+  // console.log("****state****", statesList);
+
+  const departmentList = useSelector(
+    (store) => store.persistedReducers.departments
+  );
+  // console.log("****dept****", departmentList);
+
+  const employeeId = useSelector((store) => store.persistedReducers.employees);
+  // console.log(employeeId);
+
+  const employeesIdArray = [];
+  const allEmployeesIdInStore = employeeId?.forEach((item) => {
+    employeesIdArray.push(item.id);
+
+    // return employeesIdArray;
+  });
+  // console.log(employeesIdArray);
+  const actualMaxId = Math.max(...employeesIdArray);
+  // console.log(actualMaxId);
+
   // console.log(employee);
   //Modal setting
   const [openModal, setOpenModal] = useState(false);
 
-  const addEmployee = (e) => {
-    e.preventDefault();
-    setOpenModal(true);
+  const onSubmit = (data, e) => {
+    newEmployee.id = actualMaxId + 1;
+    newEmployee.first_name = data.first_name;
+    newEmployee.last_name = data.last_name;
+    newEmployee.date_of_birth = format(data.date_of_birth, "dd/MM/yyy");
+    newEmployee.start_date = format(data.start_date, "dd/MM/yyyy");
+    newEmployee.street = data.street;
+    newEmployee.city = data.city;
+    newEmployee.state = data.state;
+    newEmployee.zip_code = data.zip_code;
+    newEmployee.department = data.department;
+
+    // setOpenModal(true);
     //Employee infos
-    const form = e.currentTarget;
-    // console.log(form);
-
-    const formData = new FormData(form);
-    let formObject = Object.fromEntries(formData.entries());
-    // console.log(formObject);
-    employee.city = formObject.city;
-    employee.department = formObject.department;
-    employee.first_name = formObject.first_name;
-    employee.last_name = formObject.last_name;
-    employee.state = formObject.state;
-    employee.street = formObject.street;
-    employee.zip_code = formObject.zip_code;
-    employee.id = actualMaxId + 1;
-    dispatch(addEmployeeToTheStore(employee));
+    console.log(newEmployee);
+    dispatch(addEmployeeToTheStore(newEmployee));
+    reset();
   };
 
-  const handleSelectState = (e) => {
-    setState(e.target.value);
-    // console.log(e.target.value);
-  };
-  const handleSelectDepartment = (e) => {
-    setDepartment(e.target.value);
-    // console.log(e.target.value);
-  };
+  const selectStateList = statesList?.map((state, index) => {
+    return (
+      <option key={uuidv4()} value={state.value}>
+        {state.name}
+      </option>
+    );
+  });
 
-  const handleDateOfBirth = (newValue) => {
-    // console.log(newValue);
-
-    const day = newValue?.$D;
-    const month = newValue?.$M + 1;
-    const year = newValue?.$y;
-    const formatedDate = `${day}/${month}/${year}`;
-    // console.log(formatedDate);
-    setDateOfBirth(newValue);
-    employee.date_of_birth = formatedDate;
-  };
-
-  const handleStartDate = (newValue) => {
-    // console.log(newValue);
-
-    const day = newValue?.$D;
-    const month = newValue?.$M + 1;
-    const year = newValue?.$y;
-    const formatedDate = `${day}/${month}/${year}`;
-    // console.log(formatedDate);
-    setStartDate(newValue);
-    employee.start_date = formatedDate;
-  };
-
-  //DatePicker
-  const StyledDatePicker = styled(DatePicker)(({ theme }) => ({
-    "& .MuiOutlinedInput-root": {
-      "&:hover fieldset": {
-        borderColor: "#000",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "#000",
-        borderWidth: 2,
-      },
-    },
-    "& .MuiIconButton-root": {
-      "&:hover": {
-        color: "#000",
-      },
-    },
-    "& .MuiInputLabel-shrink": {
-      color: "#000",
-      fontWeight: 500,
-    },
-  }));
-
-  const StyledSelectTextfield = styled(TextField)(({ theme }) => ({
-    "& .MuiOutlinedInput-root": {
-      "&:hover fieldset": {
-        borderColor: "#000",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "#000",
-        borderWidth: 2,
-      },
-    },
-    "& .MuiIconButton-root": {
-      "&:hover": {
-        color: "#000",
-      },
-    },
-  }));
-
-  // appel de UseForm
-  const form = useForm();
-  // tout ce qui va être "suivi" par UseForm
-  const { register, control } = form;
+  const selectDepartmentList = departmentList?.map((department, index) => {
+    return (
+      <option key={uuidv4()} value={department.value}>
+        {department.name}
+      </option>
+    );
+  });
 
   return (
     <>
-      <Box className={s.create_employee_container}>
+      <div className={s.create_employee_container}>
         <Typography variant="h5" className={s.create_employee_title}>
           Create Employee
         </Typography>
 
-        <form onSubmit={addEmployee} className={s.form_container}>
-          <FormInput
-            className={s.test_input}
-            name={"first_name"}
-            // {...register("first_name",)}
-            label={"First Name"}
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className={s.form_container}
+          noValidate
+        >
+          <label htmlFor="first_name">First Name</label>
+          <input
+            type="text"
+            id="first_name"
+            {...register("first_name", {
+              required: "First name is required",
+            })}
           />
-          <FormInput
-            // name={"last_name"}
-            {...register("last_name")}
-            label={"Last Name"}
+          <p className={s.input_error_message}>{errors.first_name?.message}</p>
+          <label htmlFor="last_name">Last Name</label>
+          <input
+            type="text"
+            id="last_name"
+            {...register("last_name", {
+              required: "Last name is required",
+            })}
           />
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <StyledDatePicker
-              // name="birthday"
-              {...register("birthday")}
-              label="Date of Birth"
-              inputFormat={"dd-MM-yyyy"}
-              value={dateOfBirth}
-              onChange={handleDateOfBirth}
-              sx={{
-                mb: 2,
-                borderRadius: "5px",
-                border: "1px solid #33333",
-                backgroundColor: "#fff",
-              }}
+          <p className={s.input_error_message}>{errors.last_name?.message}</p>
+          <label htmlFor="date_of_birth">Date of Birth</label>
+          <input
+            type="date"
+            id="date_of_birth"
+            {...register("date_of_birth", {
+              valueAsDate: true,
+              required: "Date of birth is required",
+            })}
+          />
+          <p className={s.input_error_message}>
+            {errors.date_of_birth?.message}
+          </p>
+          <label htmlFor="start_date">Start Date</label>
+          <input
+            type="date"
+            id="start_date"
+            {...register("start_date", {
+              valueAsDate: true,
+              required: "Start date is required",
+            })}
+          />
+          <p className={s.input_error_message}>{errors.start_date?.message}</p>
+          <fieldset>
+            <legend>Adress</legend>
+            <label htmlFor="street">Street</label>
+            <input
+              type="text"
+              id="street"
+              {...register("street", {
+                required: "Street is required",
+              })}
             />
-          </LocalizationProvider>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <StyledDatePicker
-              {...register("startDate")}
-              label="Start Date"
-              inputFormat={"dd-MM-yyyy"}
-              value={startDate}
-              onChange={handleStartDate}
-              sx={{
-                mb: 2,
-                borderRadius: "5px",
-                border: "1px solid #33333",
-                backgroundColor: "#fff",
-                "Start Date": {
-                  color: "#fff",
-                  "&.Mui-focused": {
-                    color: "#fff",
-                  },
-                },
-              }}
+            <p className={s.input_error_message}>{errors.street?.message}</p>
+            <label htmlFor="city">City</label>
+            <input
+              type="text"
+              id="city"
+              {...register("city", {
+                required: "City is required",
+              })}
             />
-          </LocalizationProvider>
-          <Box
-            component={"fieldset"}
-            className={s.adress_fieldset}
-            sx={{
-              border: "2px solid rgba(192,192,192,0.9)",
-              width: 300,
-              marginBottom: 2,
-            }}
+            <p className={s.input_error_message}>{errors.city?.message}</p>
+            <label htmlFor="state">State</label>
+            <select
+              type="text"
+              id="state"
+              {...register("state", {
+                required: "State is required",
+              })}
+            >
+              <option value="">-- Choose a state --</option>;{selectStateList}
+            </select>
+            <p className={s.input_error_message}>{errors.state?.message}</p>
+            <label htmlFor="zip_code">Zip Code</label>
+            <input
+              type="number"
+              id="zip_code"
+              {...register("zip_code", {
+                required: "Zip code is required",
+              })}
+            />
+            <p className={s.input_error_message}>{errors.zip_code?.message}</p>
+          </fieldset>
+          <label htmlFor="state">Department</label>
+          <select
+            type="text"
+            id="department"
+            {...register("department", {
+              required: "Department is required",
+            })}
           >
-            <legend className={s.legend_title}>Adress</legend>
-            <FormInput
-              // name={"street"}
-              {...register("street")}
-              label={"Street"}
-            />
-            <FormInput
-              // name={"city"}
-              {...register("city")}
-              label={"City"}
-            />
-            <FormControl sx={{ width: 250 }}>
-              <StyledSelectTextfield
-                select
-                // name={"state"}
-                {...register("state")}
-                id="select_state"
-                defaultValue={""}
-                label="Sate"
-                onChange={handleSelectState}
-                fullWidth
-                sx={{
-                  mb: 2,
-                  borderRadius: "5px",
-                  border: "4px solid #33333",
-                  backgroundColor: "#fff",
-                }}
-                InputLabelProps={{
-                  sx: {
-                    color: "#666a86",
-                    fontFamily: "Roboto",
-                    fontWeight: "500",
-                    [`&.${inputLabelClasses.shrink}`]: {
-                      // set the color of the label when shrinked (usually when the TextField is focused)
-                      color: "#000",
-                    },
-                  },
-                }}
-                inputProps={{
-                  sx: {
-                    color: "#33333",
-                    // fontSize: "1.2rem",
-                  },
-                }}
-                InputProps={{
-                  sx: {
-                    "&:hover fieldset": {
-                      border: "2px solid #000!important",
-                      borderRadius: "5px",
-                    },
-                    "&:focus-within fieldset, &:focus-visible fieldset": {
-                      border: "2px solid #000!important",
-                    },
-                  },
-                }}
-              >
-                {statesList?.map((item) => (
-                  <MenuItem key={item.name} value={item.name}>
-                    {item.name}
-                  </MenuItem>
-                ))}
-              </StyledSelectTextfield>
-            </FormControl>
-            <FormInput
-              // name={"zip_code"}
-              {...register("zip_code")}
-              label={"Zip Code"}
-            />
-          </Box>
-          <FormControl sx={{ width: 300 }}>
-            <TextField
-              select
-              // name="department"
-              {...register("department")}
-              id="select_department"
-              defaultValue={""}
-              label="Department"
-              onChange={handleSelectDepartment}
-              fullWidth
-              sx={{
-                mb: 2,
-                borderRadius: "5px",
-                border: "1px solid #33333",
-                backgroundColor: "#fff",
-              }}
-              InputLabelProps={{
-                sx: {
-                  color: "#666a86",
-                  fontFamily: "Roboto",
-                  fontWeight: "500",
-                  [`&.${inputLabelClasses.shrink}`]: {
-                    // set the color of the label when shrinked (usually when the TextField is focused)
-                    color: "#000",
-                  },
-                },
-              }}
-              inputProps={{
-                sx: {
-                  color: "#33333",
-                  // fontSize: "1.2rem",
-                },
-              }}
-              InputProps={{
-                sx: {
-                  "&:hover fieldset": {
-                    border: "2px solid #000!important",
-                    borderRadius: "5px",
-                  },
-                  "&:focus-within fieldset, &:focus-visible fieldset": {
-                    border: "2px solid #000!important",
-                  },
-                },
-              }}
-            >
-              {departmentList?.map((item) => (
-                <MenuItem key={item.name} value={item.name}>
-                  {item.name}
-                </MenuItem>
-              ))}
-            </TextField>
-          </FormControl>
-          <Box display={"flex"} justifyContent={"center"}>
-            <Button
-              type="submit"
-              className={s.openModalBtn}
-              variant="contained"
-              sx={{ backgroundColor: "#333333" }}
-            >
-              Save
-            </Button>
-          </Box>
+            <option value="">-- Choose a department --</option>
+            {selectDepartmentList}
+          </select>
+          <p className={s.input_error_message}>{errors.department?.message}</p>
+          <button type="submit">Save</button>
         </form>
         <DevTool control={control} />
-      </Box>
+      </div>
       {openModal && <Modal closeModal={setOpenModal} />}
     </>
   );

@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 import {
   useTable,
   useSortBy,
@@ -25,7 +26,8 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Input from "@mui/material/Input";
-
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 export const EmployeesTable = () => {
   const employeesList = useSelector(
     (store) => store.persistedReducers.employees
@@ -72,13 +74,33 @@ export const EmployeesTable = () => {
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <tr
+              className="table_head_first_row"
+              key={uuidv4()}
+              {...headerGroup.getHeaderGroupProps()}
+            >
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render("Header")}
-                  <span>
-                    {column.isSorted ? (column.isSortedDesc ? "D" : "A") : ""}
-                  </span>
+                <th
+                  className="table_column_head_cell"
+                  key={uuidv4()}
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                >
+                  <div className="column_header_container">
+                    <div className="column_header_text">
+                      {column.render("Header")}
+                    </div>
+                    <div className="column_header_arrow">
+                      {column.isSorted ? (
+                        column.isSortedDesc ? (
+                          <ArrowDownwardIcon />
+                        ) : (
+                          <ArrowUpwardIcon />
+                        )
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  </div>
                 </th>
               ))}
             </tr>
@@ -88,10 +110,12 @@ export const EmployeesTable = () => {
           {page.map((row) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps}>
-                {row.cells.map((cell) => {
+              <tr key={uuidv4()} {...row.getRowProps}>
+                {row.cells.map((cell, index) => {
                   return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    <td key={uuidv4()} {...cell.getCellProps()}>
+                      {cell.render("Cell")}
+                    </td>
                   );
                 })}
               </tr>
@@ -141,7 +165,7 @@ export const EmployeesTable = () => {
             onChange={(e) => setPageSize(Number(e.target.value))}
           >
             {[10, 25, 50].map((pageSize) => (
-              <MenuItem key={pageSize} value={pageSize}>
+              <MenuItem key={uuidv4()} value={pageSize}>
                 Show {pageSize}
               </MenuItem>
             ))}
