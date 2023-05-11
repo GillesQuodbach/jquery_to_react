@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = [
   {
-    id: 1,
     first_name: "Helge",
     last_name: "Britland",
     start_date: "21/04/2017",
@@ -14,7 +13,6 @@ const initialState = [
     zip_code: "84170",
   },
   {
-    id: 2,
     first_name: "Annabela",
     last_name: "Matresse",
     start_date: "26/06/1972",
@@ -26,7 +24,6 @@ const initialState = [
     zip_code: "06160",
   },
   {
-    id: 3,
     first_name: "Corri",
     last_name: "Briton",
     start_date: "26/09/1976",
@@ -38,7 +35,6 @@ const initialState = [
     zip_code: "62794",
   },
   {
-    id: 4,
     first_name: "Clayborne",
     last_name: "Conduit",
     start_date: "17/07/2005",
@@ -50,7 +46,6 @@ const initialState = [
     zip_code: "01152",
   },
   {
-    id: 5,
     first_name: "Bettine",
     last_name: "Thom",
     start_date: "28/09/2010",
@@ -62,7 +57,6 @@ const initialState = [
     zip_code: "48555",
   },
   {
-    id: 6,
     first_name: "Arnie",
     last_name: "Cockney",
     start_date: "23/05/1996",
@@ -74,7 +68,6 @@ const initialState = [
     zip_code: "32919",
   },
   {
-    id: 7,
     first_name: "Lilllie",
     last_name: "MacAndie",
     start_date: "11/03/2020",
@@ -86,7 +79,6 @@ const initialState = [
     zip_code: "12305",
   },
   {
-    id: 8,
     first_name: "Louie",
     last_name: "Mosedill",
     start_date: "10/02/1978",
@@ -98,7 +90,6 @@ const initialState = [
     zip_code: "98442",
   },
   {
-    id: 9,
     first_name: "Roxy",
     last_name: "Ropp",
     start_date: "04/09/2008",
@@ -110,7 +101,6 @@ const initialState = [
     zip_code: "33487",
   },
   {
-    id: 10,
     first_name: "Emilia",
     last_name: "Arpe",
     start_date: "24/09/2003",
@@ -122,7 +112,6 @@ const initialState = [
     zip_code: "28815",
   },
   {
-    id: 11,
     first_name: "Sax",
     last_name: "Mosley",
     start_date: "28/12/1975",
@@ -134,7 +123,6 @@ const initialState = [
     zip_code: "47134",
   },
   {
-    id: 12,
     first_name: "Benjamin",
     last_name: "Curteis",
     start_date: "19/03/1979",
@@ -146,7 +134,6 @@ const initialState = [
     zip_code: "92132",
   },
   {
-    id: 13,
     first_name: "Olvan",
     last_name: "Costa",
     start_date: "09/02/2010",
@@ -158,7 +145,6 @@ const initialState = [
     zip_code: "29240",
   },
   {
-    id: 14,
     first_name: "Donica",
     last_name: "Lipgens",
     start_date: "10/03/1971",
@@ -170,7 +156,6 @@ const initialState = [
     zip_code: "97216",
   },
   {
-    id: 15,
     first_name: "Sal",
     last_name: "Martinovsky",
     start_date: "22/05/2009",
@@ -182,7 +167,6 @@ const initialState = [
     zip_code: "84093",
   },
   {
-    id: 16,
     first_name: "Ophelie",
     last_name: "Farndale",
     start_date: "19/04/2016",
@@ -194,7 +178,6 @@ const initialState = [
     zip_code: "10203",
   },
   {
-    id: 17,
     first_name: "Chiquia",
     last_name: "Adelsberg",
     start_date: "20/01/1972",
@@ -206,7 +189,6 @@ const initialState = [
     zip_code: "44118",
   },
   {
-    id: 18,
     first_name: "Valry",
     last_name: "Waters",
     start_date: "14/11/2005",
@@ -218,7 +200,6 @@ const initialState = [
     zip_code: "35895",
   },
   {
-    id: 19,
     first_name: "Hall",
     last_name: "Munden",
     start_date: "29/01/2008",
@@ -230,7 +211,6 @@ const initialState = [
     zip_code: "74133",
   },
   {
-    id: 20,
     first_name: "Base",
     last_name: "Voff",
     start_date: "16/06/1970",
@@ -242,7 +222,6 @@ const initialState = [
     zip_code: "02283",
   },
   {
-    id: 21,
     first_name: "Artie",
     last_name: "Harrad",
     start_date: "21/05/2015",
@@ -254,7 +233,6 @@ const initialState = [
     zip_code: "94237",
   },
   {
-    id: 22,
     first_name: "Chryste",
     last_name: "McMurty",
     start_date: "12/06/2012",
@@ -266,7 +244,6 @@ const initialState = [
     zip_code: "37245",
   },
   {
-    id: 23,
     first_name: "Barris",
     last_name: "Drivers",
     start_date: "24/12/2011",
@@ -278,7 +255,6 @@ const initialState = [
     zip_code: "90020",
   },
   {
-    id: 24,
     first_name: "Elsi",
     last_name: "Manueau",
     start_date: "14/01/2003",
@@ -290,7 +266,6 @@ const initialState = [
     zip_code: "55811",
   },
   {
-    id: 25,
     first_name: "Etta",
     last_name: "Paulsen",
     start_date: "28/06/1970",
@@ -302,7 +277,6 @@ const initialState = [
     zip_code: "99790",
   },
   {
-    id: 26,
     first_name: "Laina",
     last_name: "Bannester",
     start_date: "26/11/2012",
@@ -314,7 +288,6 @@ const initialState = [
     zip_code: "30061",
   },
   {
-    id: 27,
     first_name: "Hendrika",
     last_name: "Sutherley",
     start_date: "22/01/1999",
@@ -326,7 +299,6 @@ const initialState = [
     zip_code: "20005",
   },
   {
-    id: 28,
     first_name: "Dorine",
     last_name: "Guille",
     start_date: "20/09/1991",
@@ -338,7 +310,6 @@ const initialState = [
     zip_code: "77806",
   },
   {
-    id: 29,
     first_name: "Michaella",
     last_name: "Kondratyuk",
     start_date: "31/10/1993",
@@ -350,7 +321,6 @@ const initialState = [
     zip_code: "16534",
   },
   {
-    id: 30,
     first_name: "Jeno",
     last_name: "Halgarth",
     start_date: "24/04/1989",

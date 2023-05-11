@@ -1,90 +1,47 @@
 import s from "./style.module.css";
 import { v4 as uuidv4 } from "uuid";
 import { addEmployeeToTheStore } from "../../store/employees/employees-slice";
-import {
-  Button,
-  Box,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Modal from "../../components/Modal/Modal";
 import { useState } from "react";
-import { DatePicker } from "@mui/x-date-pickers";
 import { useSelector } from "react-redux";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { useDispatch } from "react-redux";
-import { inputLabelClasses } from "@mui/material/InputLabel";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 function CreateEmployee(props) {
-  const [newEmployee, setNewEmployee] = useState({
-    id: "",
-    first_name: "",
-    last_name: "",
-    start_date: "",
-    department: "",
-    date_of_birth: "",
-    street: "",
-    city: "",
-    state: "",
-    zip_code: "",
-  });
-
   const form = useForm();
   const { register, control, handleSubmit, formState, reset } = form;
   const { errors } = formState;
-
   const dispatch = useDispatch();
+
   const statesList = useSelector((store) => store.persistedReducers.states);
   // console.log("****state****", statesList);
 
   const departmentList = useSelector(
     (store) => store.persistedReducers.departments
   );
-  // console.log("****dept****", departmentList);
 
-  const employeeId = useSelector((store) => store.persistedReducers.employees);
-  // console.log(employeeId);
-
-  const employeesIdArray = [];
-  const allEmployeesIdInStore = employeeId?.forEach((item) => {
-    employeesIdArray.push(item.id);
-
-    // return employeesIdArray;
-  });
-  // console.log(employeesIdArray);
-  const actualMaxId = Math.max(...employeesIdArray);
-  // console.log(actualMaxId);
-
-  // console.log(employee);
-  //Modal setting
   const [openModal, setOpenModal] = useState(false);
 
   const onSubmit = (data, e) => {
-    newEmployee.id = actualMaxId + 1;
-    newEmployee.first_name = data.first_name;
-    newEmployee.last_name = data.last_name;
-    newEmployee.date_of_birth = format(data.date_of_birth, "dd/MM/yyy");
-    newEmployee.start_date = format(data.start_date, "dd/MM/yyyy");
-    newEmployee.street = data.street;
-    newEmployee.city = data.city;
-    newEmployee.state = data.state;
-    newEmployee.zip_code = data.zip_code;
-    newEmployee.department = data.department;
+    e.preventDefault();
 
-    // setOpenModal(true);
     //Employee infos
-    console.log(newEmployee);
-    dispatch(addEmployeeToTheStore(newEmployee));
+    data.start_date = format(
+      parseISO(data.start_date.toISOString()),
+      `dd/MM/yyyy`
+    );
+    data.date_of_birth = format(
+      parseISO(data.date_of_birth.toISOString()),
+      `dd/MM/yyyy`
+    );
+
+    console.log(data);
+    dispatch(addEmployeeToTheStore(data));
     reset();
+    setOpenModal(true);
   };
 
   const selectStateList = statesList?.map((state, index) => {
@@ -104,8 +61,8 @@ function CreateEmployee(props) {
   });
 
   return (
-    <>
-      <div className={s.create_employee_container}>
+    <Box>
+      <Box className={s.create_employee_container}>
         <Typography variant="h5" className={s.create_employee_title}>
           Create Employee
         </Typography>
@@ -183,7 +140,8 @@ function CreateEmployee(props) {
                 required: "State is required",
               })}
             >
-              <option value="">-- Choose a state --</option>;{selectStateList}
+              <option value="">-- Choose a state --</option>
+              {selectStateList}
             </select>
             <p className={s.input_error_message}>{errors.state?.message}</p>
             <label htmlFor="zip_code">Zip Code</label>
@@ -211,9 +169,9 @@ function CreateEmployee(props) {
           <button type="submit">Save</button>
         </form>
         <DevTool control={control} />
-      </div>
+      </Box>
       {openModal && <Modal closeModal={setOpenModal} />}
-    </>
+    </Box>
   );
 }
 
