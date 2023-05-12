@@ -3,7 +3,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-bottom: 20px;
   height: 160px;
 }
 
@@ -11,7 +10,8 @@
   font-size: 2.5rem;
   color: #fff;
   margin-top: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 16px;
+  text-align: center;
 }
 
 .header_link {
@@ -20,4 +20,16 @@
   font-size: 0.8rem;
   font-weight: 500;
   color: #fff;
+}
+
+@media (max-width: 425px) {
+  .header_container {
+    height: 140px;
+  }
+
+  .header_title {
+    margin-top: 32px;
+    margin-bottom: 32px;
+    font-size: 1.5rem;
+  }
 }
