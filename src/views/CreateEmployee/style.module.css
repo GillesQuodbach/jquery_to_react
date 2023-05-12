@@ -53,15 +53,15 @@
   margin-bottom: 15px;
 }
 
-.form_container input,
+/* .form_container input,
 select {
   margin-bottom: 10px;
-}
+} */
 
-.form_container button {
+/* .form_container button {
   align-self: center;
   margin-top: 15px;
-}
+} */
 
 .input_error_message {
   color: red;

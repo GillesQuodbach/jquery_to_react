@@ -1,0 +1,23 @@
+#root {
+  padding-left: 32px;
+  padding-right: 32px;
+
+  width: 100vw;
+  height: calc(100vh + 100px);
+  background: -webkit-linear-gradient(45deg, #49a09d, #5f2c82);
+  background: linear-gradient(45deg, #49a09d, #5f2c82);
+}
+
+@media (min-width: 768px) {
+  #root {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (min-width: 769px) {
+  #root {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}

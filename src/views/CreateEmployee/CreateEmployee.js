@@ -1,14 +1,17 @@
 import s from "./style.module.css";
+import "./CreateEmployee.css";
 import { v4 as uuidv4 } from "uuid";
 import { addEmployeeToTheStore } from "../../store/employees/employees-slice";
-import { Box, Typography } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import Modal from "../../components/Modal/Modal";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { format, parseISO } from "date-fns";
+import Select from "react-select";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 function CreateEmployee(props) {
   const form = useForm();
@@ -16,6 +19,7 @@ function CreateEmployee(props) {
   const { errors } = formState;
   const dispatch = useDispatch();
 
+  //React Select Component
   const statesList = useSelector((store) => store.persistedReducers.states);
   // console.log("****state****", statesList);
 
@@ -60,6 +64,11 @@ function CreateEmployee(props) {
     );
   });
 
+  const [startDate, setStartDate] = useState(null);
+  const [dateOfBirth, setDateOfBirth] = useState(null);
+
+  console.log(startDate);
+
   return (
     <Box>
       <Box className={s.create_employee_container}>
@@ -91,25 +100,66 @@ function CreateEmployee(props) {
           />
           <p className={s.input_error_message}>{errors.last_name?.message}</p>
           <label htmlFor="date_of_birth">Date of Birth</label>
-          <input
+          <Controller
+            name="date_of_birth"
+            control={control}
+            defaultValue={null}
+            rules={{
+              required: { value: true, message: "Birth date is required" },
+            }}
+            render={({ field }) => (
+              <DatePicker
+                // label="Start date"
+                value={dateOfBirth}
+                onChange={(newValue) => {
+                  setDateOfBirth(newValue);
+                }}
+                inputFormat="dd MM yyyy"
+                slotProps={{ textField: { variant: "outlined" } }}
+                {...field}
+              />
+            )}
+          />
+          {/* <input
             type="date"
             id="date_of_birth"
             {...register("date_of_birth", {
               valueAsDate: true,
               required: "Date of birth is required",
             })}
-          />
+          /> */}
           <p className={s.input_error_message}>
             {errors.date_of_birth?.message}
           </p>
-          <label htmlFor="start_date">Start Date</label>
+          {/* <label htmlFor="start_date">Start Date</label>
           <input
             type="date"
             id="start_date"
             {...register("start_date", {
               valueAsDate: true,
               required: "Start date is required",
-            })}
+            })} */}
+          {/* /> */}
+          <label htmlFor="start_date">Start Date</label>
+          <Controller
+            name="start_date"
+            control={control}
+            defaultValue={null}
+            rules={{
+              required: { value: true, message: "Start date is required" },
+            }}
+            render={({ field }) => (
+              <DatePicker
+                // label="Start date"
+                value={startDate}
+                onChange={(newValue) => {
+                  setStartDate(newValue);
+                }}
+                inputFormat="dd MM yyyy"
+                slotProps={{ textField: { variant: "outlined" } }}
+                {...field}
+              />
+            )}
           />
           <p className={s.input_error_message}>{errors.start_date?.message}</p>
           <fieldset>

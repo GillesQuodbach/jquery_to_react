@@ -9,8 +9,7 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/lab": "^5.0.0-alpha.127",
     "@mui/material": "^5.12.1",
-    "@mui/x-data-grid": "^6.2.1",
-    "@mui/x-date-pickers": "^6.2.1",
+    "@mui/x-date-pickers": "^6.3.1",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -24,7 +23,6 @@
     "react-router": "^6.10.0",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
-    "react-super-responsive-table": "^5.2.1",
     "react-table": "^7.8.0",
     "redux-persist": "^6.0.0",
     "uuid": "^9.0.0",
@@ -56,6 +54,7 @@
     ]
   },
   "devDependencies": {
-    "@hookform/devtools": "^4.3.1"
+    "@hookform/devtools": "^4.3.1",
+    "react-select": "^5.7.3"
   }
 }
