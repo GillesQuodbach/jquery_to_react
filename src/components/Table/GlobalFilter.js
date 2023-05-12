@@ -10,6 +10,7 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 
+//Search icon
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -58,10 +59,15 @@ export const GlobalFilter = ({ filter, setFilter }) => {
     //   <SearchIcon /> {""}
     //   <input value={filter || ""} onChange={(e) => setFilter(e.target.value)} />
     // </span>
-    <Box sx={{ flexGrow: 1 }}>
+    <Box
+      className="search_container"
+      sx={{ flexGrow: 1, height: "min-content" }}
+    >
       <AppBar
         position="static"
         sx={{
+          display: "flex",
+
           backgroundColor: "#55608f",
           boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
         }}

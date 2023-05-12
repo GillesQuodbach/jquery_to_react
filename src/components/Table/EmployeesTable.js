@@ -11,23 +11,13 @@ import { COLUMNS, GROUPED_COLUMNS } from "./columns";
 import "./EmployeesTable.css";
 import { GlobalFilter } from "./GlobalFilter";
 import { Button, colors } from "@mui/material";
-
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
-import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
-import Input from "@mui/material/Input";
+
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+
 export const EmployeesTable = () => {
   const employeesList = useSelector(
     (store) => store.persistedReducers.employees
@@ -69,147 +59,137 @@ export const EmployeesTable = () => {
   const { globalFilter, pageIndex, pageSize } = state;
 
   return (
-    <>
-      <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr
-              className="table_head_first_row"
-              key={uuidv4()}
-              {...headerGroup.getHeaderGroupProps()}
-            >
-              {headerGroup.headers.map((column) => (
-                <th
-                  className="table_column_head_cell"
-                  key={uuidv4()}
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
-                >
-                  <div className="column_header_container">
-                    <div className="column_header_text">
-                      {column.render("Header")}
-                    </div>
-                    <div className="column_header_arrow">
-                      {column.isSorted ? (
-                        column.isSortedDesc ? (
-                          <ArrowDownwardIcon />
+    <div className="global_table_container">
+      <div className="table_container">
+        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+        <table {...getTableProps()}>
+          <thead className="table_head_row">
+            {headerGroups.map((headerGroup) => (
+              <tr
+                className="table_head_first_row"
+                key={uuidv4()}
+                {...headerGroup.getHeaderGroupProps()}
+              >
+                {headerGroup.headers.map((column) => (
+                  <th
+                    className="table_column_head_cell"
+                    key={uuidv4()}
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                  >
+                    <div className="column_header_container">
+                      <div className="column_header_text">
+                        {column.render("Header")}
+                      </div>
+                      <div className="column_header_arrow">
+                        {column.isSorted ? (
+                          column.isSortedDesc ? (
+                            <ArrowDownwardIcon />
+                          ) : (
+                            <ArrowUpwardIcon />
+                          )
                         ) : (
-                          <ArrowUpwardIcon />
-                        )
-                      ) : (
-                        ""
-                      )}
+                          ""
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row) => {
-            prepareRow(row);
-            return (
-              <tr key={uuidv4()} {...row.getRowProps}>
-                {row.cells.map((cell, index) => {
-                  return (
-                    <td key={uuidv4()} {...cell.getCellProps()}>
-                      {cell.render("Cell")}
-                    </td>
-                  );
-                })}
+                  </th>
+                ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <div className="pagination_container">
-        <div className="pagination_pages_container">
-          <span className="pagination_show_page">
-            Page{" "}
-            <strong>
-              {pageIndex + 1} of {pageOptions.length}
-            </strong>{" "}
-          </span>
-          <span className="pagination_pipe">|</span>
-          <span className="pagination_go_to_page">
-            Go to page:{" "}
-            <TextField
-              size="small"
-              sx={{
-                backgroundColor: "#333333",
-                color: "#fff",
-                borderRadius: "4px",
-              }}
-              type="number"
-              defaultValue={pageIndex + 1}
-              onChange={(e) => {
-                const pageNumber = e.target.value
-                  ? Number(e.target.value) - 1
-                  : 0;
-                gotoPage(pageNumber);
-              }}
-              style={{
-                width: "70px",
-                marginLeft: "10px",
-              }}
-            />
-          </span>
-        </div>
-        <div className="pagination_select_page_dropdown_container">
-          <Select
-            sx={{ backgroundColor: "#333333" }}
-            size="small"
-            className="pagination_select_page_dropdown"
-            value={pageSize}
-            onChange={(e) => setPageSize(Number(e.target.value))}
-          >
-            {[10, 25, 50].map((pageSize) => (
-              <MenuItem key={uuidv4()} value={pageSize}>
-                Show {pageSize}
-              </MenuItem>
             ))}
-          </Select>
-        </div>
-        <div className="pagination_button_container">
-          <Button
-            size="small"
-            variant="contained"
-            className="pagination_first_page"
-            onClick={() => gotoPage(0)}
-            disabled={!canPreviousPage}
-          >
-            {"<<"}
-          </Button>
-          <Button
-            size="small"
-            variant="contained"
-            className="pagination_previous_page"
-            onClick={() => previousPage()}
-            disabled={!canPreviousPage}
-          >
-            Previous
-          </Button>
-          <Button
-            size="small"
-            variant="contained"
-            className="pagination_next_page"
-            onClick={() => nextPage()}
-            disabled={!canNextPage}
-          >
-            Next
-          </Button>
-          <Button
-            size="small"
-            variant="contained"
-            className="pagination_last_page"
-            onClick={() => gotoPage(pageCount - 1)}
-            disabled={!canNextPage}
-          >
-            {">>"}
-          </Button>
+          </thead>
+          <tbody className="table_body_container" {...getTableBodyProps()}>
+            {page.map((row) => {
+              prepareRow(row);
+              return (
+                <tr className="table_row" key={uuidv4()} {...row.getRowProps}>
+                  {row.cells.map((cell, index) => {
+                    return (
+                      <td
+                        className="table_cell"
+                        key={uuidv4()}
+                        {...cell.getCellProps()}
+                      >
+                        {cell.render("Cell")}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <div className="pagination_container">
+          <div className="page_container">
+            <div className="pagination_pages_container">
+              <span className="pagination_show_page">
+                Page{" "}
+                <strong>
+                  {pageIndex + 1} of {pageOptions.length}
+                </strong>{" "}
+              </span>
+            </div>
+            <div className="pagination_select_page_dropdown_container">
+              <Select
+                sx={{ backgroundColor: "#333333", height: "24px" }}
+                className="pagination_select_page_dropdown"
+                value={pageSize}
+                onChange={(e) => setPageSize(Number(e.target.value))}
+              >
+                {[10, 25, 50].map((pageSize) => (
+                  <MenuItem key={uuidv4()} value={pageSize}>
+                    Show {pageSize}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
+          </div>
+          <div className="pagination_button_container">
+            <div className="prev_button_container">
+              <Button
+                sx={{
+                  minWidth: "fit-content",
+                  height: "24px",
+                }}
+                variant="contained"
+                className="pagination_first_page"
+                onClick={() => gotoPage(0)}
+                disabled={!canPreviousPage}
+              >
+                {"<<"}
+              </Button>
+              <Button
+                sx={{ height: "24px", minWidth: "fit-content" }}
+                variant="contained"
+                className="pagination_previous_page"
+                onClick={() => previousPage()}
+                disabled={!canPreviousPage}
+              >
+                {"<"}
+              </Button>
+            </div>
+            <div className="next_button_container">
+              <Button
+                sx={{ height: "24px", minWidth: "fit-content" }}
+                variant="contained"
+                className="pagination_next_page"
+                onClick={() => nextPage()}
+                disabled={!canNextPage}
+              >
+                {">"}
+              </Button>
+              <Button
+                sx={{ height: "24px", minWidth: "fit-content" }}
+                variant="contained"
+                className="pagination_last_page"
+                onClick={() => gotoPage(pageCount - 1)}
+                disabled={!canNextPage}
+              >
+                {">>"}
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };

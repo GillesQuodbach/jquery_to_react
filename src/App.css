@@ -1,13 +1,32 @@
 #root {
+  padding-left: 32px;
+  padding-right: 32px;
+
   width: 100vw;
   height: 100vh;
-}
-
-.App {
   background: -webkit-linear-gradient(45deg, #49a09d, #5f2c82);
   background: linear-gradient(45deg, #49a09d, #5f2c82);
-  min-height: 100%;
+}
+
+@media (min-width: 768px) {
+  #root {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (min-width: 769px) {
+  #root {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+/* .App {
+  background: -webkit-linear-gradient(45deg, #49a09d, #5f2c82);
+  background: linear-gradient(45deg, #49a09d, #5f2c82);
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+  width: 100vw;
+  height: 100vh;
+} */
