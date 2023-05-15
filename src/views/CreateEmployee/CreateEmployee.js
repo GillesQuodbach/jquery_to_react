@@ -2,7 +2,15 @@ import s from "./style.module.css";
 import "./CreateEmployee.css";
 import { v4 as uuidv4 } from "uuid";
 import { addEmployeeToTheStore } from "../../store/employees/employees-slice";
-import { Box, TextField, Typography, Button, MenuItem } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Typography,
+  Button,
+  MenuItem,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
 import Modal from "../../components/Modal/Modal";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -26,7 +34,7 @@ function CreateEmployee(props) {
   const departmentList = useSelector(
     (store) => store.persistedReducers.departments
   );
-
+  console.log(departmentList[0].name);
   const [openModal, setOpenModal] = useState(false);
 
   const onSubmit = (data, e) => {
@@ -114,12 +122,12 @@ function CreateEmployee(props) {
             render={({ field }) => (
               <DatePicker
                 size="small"
+                inputFormat="dd MM yyyy"
                 // label="Start date"
                 value={dateOfBirth}
                 onChange={(newValue) => {
                   setDateOfBirth(newValue);
                 }}
-                inputFormat="dd MM yyyy"
                 slotProps={{ textField: { variant: "outlined" } }}
                 {...field}
               />
@@ -193,17 +201,21 @@ function CreateEmployee(props) {
             />
             <p className={s.input_error_message}>{errors.city?.message}</p>
             <label htmlFor="state">State</label>
-            <TextField
-              fullWidth
-              select
-              type="text"
-              id="state"
-              {...register("state", {
-                required: "State is required",
-              })}
-            >
-              {selectStateList}
-            </TextField>
+            <FormControl>
+              <TextField
+                InputLabelProps={{ shrink: false }}
+                defaultValue={statesList[0].name}
+                fullWidth
+                select
+                type="text"
+                id="state"
+                {...register("state", {
+                  required: "State is required",
+                })}
+              >
+                {selectStateList}
+              </TextField>
+            </FormControl>
             <p className={s.input_error_message}>{errors.state?.message}</p>
             <label htmlFor="zip_code">Zip Code</label>
             <TextField
@@ -217,18 +229,22 @@ function CreateEmployee(props) {
             />
             <p className={s.input_error_message}>{errors.zip_code?.message}</p>
           </fieldset>
-          <label htmlFor="state">Department</label>
-          <TextField
-            fullWidth
-            select
-            type="text"
-            id="department"
-            {...register("department", {
-              required: "Department is required",
-            })}
-          >
-            {selectDepartmentList}
-          </TextField>
+          <label htmlFor="department">Department</label>
+          <FormControl>
+            <TextField
+              InputLabelProps={{ shrink: false }}
+              defaultValue={departmentList[0].value}
+              fullWidth
+              select
+              type="text"
+              id="department"
+              {...register("department", {
+                required: "Department is required",
+              })}
+            >
+              {selectDepartmentList}
+            </TextField>
+          </FormControl>
           <p className={s.input_error_message}>{errors.department?.message}</p>
           <Button type="submit" variant="contained">
             Save
