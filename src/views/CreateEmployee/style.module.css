@@ -33,9 +33,9 @@
   align-items: flex-start;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 320px) {
   .form_container {
-    width: 90%;
+    width: 100%;
   }
 }
 
@@ -46,7 +46,7 @@
   font-weight: 500;
 } */
 
-.form_container legend {
+/* .form_container legend {
   margin-bottom: 5px;
   color: #fff;
   font-size: 1.3rem;
@@ -57,7 +57,9 @@
   border: 2px solid #fff;
   margin-top: 10px;
   margin-bottom: 15px;
-}
+  display: flex;
+  flex-direction: column;
+} */
 
 /* .form_container input,
 select {

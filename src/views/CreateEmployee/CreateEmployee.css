@@ -12,7 +12,7 @@
   #root {
     padding-left: 16px;
     padding-right: 16px;
-    height: calc(100vh + 160px);
+    height: calc(100vh + 200px);
   }
 }
 
@@ -20,5 +20,11 @@
   #root {
     padding-left: 32px;
     padding-right: 32px;
+    height: calc(100vh + 200px);
   }
+}
+
+.address_fieldset {
+  display: flex;
+  flex-direction: column;
 }

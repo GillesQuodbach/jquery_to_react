@@ -43,24 +43,24 @@ function CreateEmployee(props) {
     );
 
     console.log(data);
-    dispatch(addEmployeeToTheStore(data));
+    //dispatch(addEmployeeToTheStore(data));
     reset();
     setOpenModal(true);
   };
 
   const selectStateList = statesList?.map((state, index) => {
     return (
-      <option key={uuidv4()} value={state.value}>
+      <MenuItem key={uuidv4()} value={state.name}>
         {state.name}
-      </option>
+      </MenuItem>
     );
   });
 
   const selectDepartmentList = departmentList?.map((department, index) => {
     return (
-      <option key={uuidv4()} value={department.value}>
+      <MenuItem key={uuidv4()} value={department.value}>
         {department.name}
-      </option>
+      </MenuItem>
     );
   });
 
@@ -83,8 +83,8 @@ function CreateEmployee(props) {
         >
           <label htmlFor="first_name">First Name</label>
           <TextField
-            // defaultValue={"test"}
-            label="first_name"
+            size="small"
+            defaultValue={"test"}
             type="text"
             id="first_name"
             {...register("first_name", {
@@ -94,6 +94,7 @@ function CreateEmployee(props) {
           <p className={s.input_error_message}>{errors.first_name?.message}</p>
           <label htmlFor="last_name">Last Name</label>
           <TextField
+            size="small"
             defaultValue={"test"}
             type="text"
             id="last_name"
@@ -112,6 +113,7 @@ function CreateEmployee(props) {
             }}
             render={({ field }) => (
               <DatePicker
+                size="small"
                 // label="Start date"
                 value={dateOfBirth}
                 onChange={(newValue) => {
@@ -153,6 +155,7 @@ function CreateEmployee(props) {
             }}
             render={({ field }) => (
               <DatePicker
+                size="small"
                 // label="Start date"
                 value={startDate}
                 onChange={(newValue) => {
@@ -165,10 +168,11 @@ function CreateEmployee(props) {
             )}
           />
           <p className={s.input_error_message}>{errors.start_date?.message}</p>
-          <fieldset>
+          <fieldset className="address_fieldset">
             <legend>Adress</legend>
             <label htmlFor="street">Street</label>
             <TextField
+              size="small"
               defaultValue={"test"}
               type="text"
               id="street"
@@ -179,6 +183,7 @@ function CreateEmployee(props) {
             <p className={s.input_error_message}>{errors.street?.message}</p>
             <label htmlFor="city">City</label>
             <TextField
+              size="small"
               defaultValue={"test"}
               type="text"
               id="city"
@@ -188,19 +193,21 @@ function CreateEmployee(props) {
             />
             <p className={s.input_error_message}>{errors.city?.message}</p>
             <label htmlFor="state">State</label>
-            <select
+            <TextField
+              fullWidth
+              select
               type="text"
               id="state"
               {...register("state", {
                 required: "State is required",
               })}
             >
-              <option value="">-- Choose a state --</option>
               {selectStateList}
-            </select>
+            </TextField>
             <p className={s.input_error_message}>{errors.state?.message}</p>
             <label htmlFor="zip_code">Zip Code</label>
             <TextField
+              size="small"
               defaultValue={"6767"}
               type="number"
               id="zip_code"
@@ -211,16 +218,17 @@ function CreateEmployee(props) {
             <p className={s.input_error_message}>{errors.zip_code?.message}</p>
           </fieldset>
           <label htmlFor="state">Department</label>
-          <select
+          <TextField
+            fullWidth
+            select
             type="text"
             id="department"
             {...register("department", {
               required: "Department is required",
             })}
           >
-            <option value="">-- Choose a department --</option>
             {selectDepartmentList}
-          </select>
+          </TextField>
           <p className={s.input_error_message}>{errors.department?.message}</p>
           <Button type="submit" variant="contained">
             Save
