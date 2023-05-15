@@ -2,7 +2,7 @@ import s from "./style.module.css";
 import "./CreateEmployee.css";
 import { v4 as uuidv4 } from "uuid";
 import { addEmployeeToTheStore } from "../../store/employees/employees-slice";
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, TextField, Typography, Button, MenuItem } from "@mui/material";
 import Modal from "../../components/Modal/Modal";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -82,7 +82,9 @@ function CreateEmployee(props) {
           noValidate
         >
           <label htmlFor="first_name">First Name</label>
-          <input
+          <TextField
+            // defaultValue={"test"}
+            label="first_name"
             type="text"
             id="first_name"
             {...register("first_name", {
@@ -91,7 +93,8 @@ function CreateEmployee(props) {
           />
           <p className={s.input_error_message}>{errors.first_name?.message}</p>
           <label htmlFor="last_name">Last Name</label>
-          <input
+          <TextField
+            defaultValue={"test"}
             type="text"
             id="last_name"
             {...register("last_name", {
@@ -165,7 +168,8 @@ function CreateEmployee(props) {
           <fieldset>
             <legend>Adress</legend>
             <label htmlFor="street">Street</label>
-            <input
+            <TextField
+              defaultValue={"test"}
               type="text"
               id="street"
               {...register("street", {
@@ -174,7 +178,8 @@ function CreateEmployee(props) {
             />
             <p className={s.input_error_message}>{errors.street?.message}</p>
             <label htmlFor="city">City</label>
-            <input
+            <TextField
+              defaultValue={"test"}
               type="text"
               id="city"
               {...register("city", {
@@ -195,7 +200,8 @@ function CreateEmployee(props) {
             </select>
             <p className={s.input_error_message}>{errors.state?.message}</p>
             <label htmlFor="zip_code">Zip Code</label>
-            <input
+            <TextField
+              defaultValue={"6767"}
               type="number"
               id="zip_code"
               {...register("zip_code", {
@@ -216,7 +222,9 @@ function CreateEmployee(props) {
             {selectDepartmentList}
           </select>
           <p className={s.input_error_message}>{errors.department?.message}</p>
-          <button type="submit">Save</button>
+          <Button type="submit" variant="contained">
+            Save
+          </Button>
         </form>
         <DevTool control={control} />
       </Box>

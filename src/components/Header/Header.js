@@ -11,7 +11,9 @@ function Header() {
     <div className={s.header_container}>
       {currentLocation === "/list" ? (
         <>
-          <h1 className={s.header_title}>Current Employees</h1>
+          <h1 className={`${s.header_title} ${s.header_title_table}`}>
+            Current Employees
+          </h1>
 
           <Button
             variant="contained"
@@ -26,7 +28,7 @@ function Header() {
         </>
       ) : (
         <>
-          <h1 className={s.header_title}>HRnet</h1>
+          <h1 className={`${s.header_title} ${s.header_title_home}`}>HRnet</h1>
           <Button
             variant="contained"
             sx={{
