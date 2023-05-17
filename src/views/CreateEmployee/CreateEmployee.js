@@ -1,4 +1,5 @@
 import s from "./style.module.css";
+import "../../App.css";
 import "./CreateEmployee.css";
 import { v4 as uuidv4 } from "uuid";
 import { addEmployeeToTheStore } from "../../store/employees/employees-slice";
@@ -22,6 +23,8 @@ import Select from "react-select";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 function CreateEmployee(props) {
+  const [modal, setModal] = useState(false);
+  const Toggle = () => setModal(!modal);
   const form = useForm();
   const { register, control, handleSubmit, formState, reset } = form;
   const { errors } = formState;
@@ -29,13 +32,12 @@ function CreateEmployee(props) {
 
   //React Select Component
   const statesList = useSelector((store) => store.persistedReducers.states);
-  // console.log("****state****", statesList);
+  // consolelog("****state****", statesList);
 
   const departmentList = useSelector(
     (store) => store.persistedReducers.departments
   );
   console.log(departmentList[0].name);
-  const [openModal, setOpenModal] = useState(false);
 
   const onSubmit = (data, e) => {
     e.preventDefault();
@@ -51,9 +53,9 @@ function CreateEmployee(props) {
     );
 
     console.log(data);
-    //dispatch(addEmployeeToTheStore(data));
+    dispatch(addEmployeeToTheStore(data));
     reset();
-    setOpenModal(true);
+    Toggle();
   };
 
   const selectStateList = statesList?.map((state, index) => {
@@ -75,8 +77,6 @@ function CreateEmployee(props) {
   const [startDate, setStartDate] = useState(null);
   const [dateOfBirth, setDateOfBirth] = useState(null);
 
-  console.log(startDate);
-
   return (
     <Box>
       <Box className={s.create_employee_container}>
@@ -92,7 +92,7 @@ function CreateEmployee(props) {
           <label htmlFor="first_name">First Name</label>
           <TextField
             size="small"
-            defaultValue={"test"}
+            // defaultValue={"test"}
             type="text"
             id="first_name"
             {...register("first_name", {
@@ -103,7 +103,7 @@ function CreateEmployee(props) {
           <label htmlFor="last_name">Last Name</label>
           <TextField
             size="small"
-            defaultValue={"test"}
+            // defaultValue={"test"}
             type="text"
             id="last_name"
             {...register("last_name", {
@@ -121,38 +121,27 @@ function CreateEmployee(props) {
             }}
             render={({ field }) => (
               <DatePicker
+                defaultValue={null}
+                views={["year", "month", "day"]}
+                format="dd/MM/yyyy"
                 size="small"
-                inputFormat="dd MM yyyy"
-                // label="Start date"
                 value={dateOfBirth}
                 onChange={(newValue) => {
                   setDateOfBirth(newValue);
                 }}
-                slotProps={{ textField: { variant: "outlined" } }}
+                slotProps={{
+                  textField: {
+                    variant: "outlined",
+                  },
+                }}
                 {...field}
               />
             )}
           />
-          {/* <input
-            type="date"
-            id="date_of_birth"
-            {...register("date_of_birth", {
-              valueAsDate: true,
-              required: "Date of birth is required",
-            })}
-          /> */}
+
           <p className={s.input_error_message}>
             {errors.date_of_birth?.message}
           </p>
-          {/* <label htmlFor="start_date">Start Date</label>
-          <input
-            type="date"
-            id="start_date"
-            {...register("start_date", {
-              valueAsDate: true,
-              required: "Start date is required",
-            })} */}
-          {/* /> */}
           <label htmlFor="start_date">Start Date</label>
           <Controller
             name="start_date"
@@ -163,14 +152,17 @@ function CreateEmployee(props) {
             }}
             render={({ field }) => (
               <DatePicker
-                size="small"
-                // label="Start date"
+                defaultValue={startDate}
+                views={["year", "month", "day"]}
+                format="dd/MM/yyyy"
                 value={startDate}
+                size="small"
                 onChange={(newValue) => {
                   setStartDate(newValue);
                 }}
-                inputFormat="dd MM yyyy"
-                slotProps={{ textField: { variant: "outlined" } }}
+                slotProps={{
+                  textField: { variant: "outlined" },
+                }}
                 {...field}
               />
             )}
@@ -181,7 +173,7 @@ function CreateEmployee(props) {
             <label htmlFor="street">Street</label>
             <TextField
               size="small"
-              defaultValue={"test"}
+              // defaultValue={"test"}
               type="text"
               id="street"
               {...register("street", {
@@ -192,7 +184,7 @@ function CreateEmployee(props) {
             <label htmlFor="city">City</label>
             <TextField
               size="small"
-              defaultValue={"test"}
+              // defaultValue={"test"}
               type="text"
               id="city"
               {...register("city", {
@@ -203,8 +195,10 @@ function CreateEmployee(props) {
             <label htmlFor="state">State</label>
             <FormControl>
               <TextField
+                size="small"
                 InputLabelProps={{ shrink: false }}
-                defaultValue={statesList[0].name}
+                // defaultValue={statesList[0].name}
+                defaultValue=""
                 fullWidth
                 select
                 type="text"
@@ -220,7 +214,7 @@ function CreateEmployee(props) {
             <label htmlFor="zip_code">Zip Code</label>
             <TextField
               size="small"
-              defaultValue={"6767"}
+              // defaultValue={"6767"}
               type="number"
               id="zip_code"
               {...register("zip_code", {
@@ -230,12 +224,14 @@ function CreateEmployee(props) {
             <p className={s.input_error_message}>{errors.zip_code?.message}</p>
           </fieldset>
           <label htmlFor="department">Department</label>
-          <FormControl>
+          <FormControl sx={{ width: "70%" }}>
             <TextField
+              size="small"
               InputLabelProps={{ shrink: false }}
-              defaultValue={departmentList[0].value}
+              // defaultValue={departmentList[0].value}
               fullWidth
               select
+              defaultValue=""
               type="text"
               id="department"
               {...register("department", {
@@ -246,13 +242,18 @@ function CreateEmployee(props) {
             </TextField>
           </FormControl>
           <p className={s.input_error_message}>{errors.department?.message}</p>
-          <Button type="submit" variant="contained">
+          <Button type="submit" variant="contained" className="clickMe">
             Save
           </Button>
         </form>
         <DevTool control={control} />
       </Box>
-      {openModal && <Modal closeModal={setOpenModal} />}
+      <Modal
+        show={modal}
+        close={Toggle}
+        title={"HRNet"}
+        children={"Employee successfully added "}
+      />
     </Box>
   );
 }

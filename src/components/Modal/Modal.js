@@ -1,24 +1,40 @@
-import React from "react";
-import s from "./style.module.css";
-import { useState } from "react";
+import ReactDOM from "react-dom";
+import "./Modal.css";
+import CloseIcon from "@mui/icons-material/Close";
+import { Button } from "@mui/material";
 
-const Modal = ({ closeModal }) => {
-  return (
-    <div className={s.modalBackground}>
-      <div className={s.modalContainer}>
-        <div className={s.titleCloseBtn}>
-          <button onClick={() => closeModal(false)}> X</button>
-        </div>
-        <div className={s.title}>
-          <h1 className="modal_message">New employee successfully added</h1>
-        </div>
-        <div className={s.footer}>
-          <button onClick={() => closeModal(false)} className={s.continueBtn}>
-            OK
-          </button>
+const Modal = ({ show, close, title, children }) => {
+  return ReactDOM.createPortal(
+    <>
+      <div
+        className={`modalContainer ${show ? "show" : ""}`}
+        onClick={() => close()}
+      >
+        <div className="modal" onClick={(e) => e.stopPropagation}>
+          <header className="modal_header">
+            <h2 className="modal_header_title">{title}</h2>
+            <Button
+              sx={{ top: "-90px", right: "-30px" }}
+              className="close_button close"
+              onClick={() => close()}
+            >
+              <CloseIcon />
+            </Button>
+          </header>
+          <main className="modal_content">{children}</main>
+          <footer className="modal_footer">
+            <Button
+              variant="contained"
+              className="modal_close"
+              onClick={() => close()}
+            >
+              OK
+            </Button>
+          </footer>
         </div>
       </div>
-    </div>
+    </>,
+    document.getElementById("modal")
   );
 };
 
