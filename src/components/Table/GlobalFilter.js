@@ -4,10 +4,7 @@ import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 
 //Search icon
@@ -55,10 +52,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export const GlobalFilter = ({ filter, setFilter }) => {
   return (
-    // <span className="table_searchbar">
-    //   <SearchIcon /> {""}
-    //   <input value={filter || ""} onChange={(e) => setFilter(e.target.value)} />
-    // </span>
     <Box
       className="search_container"
       sx={{ flexGrow: 1, height: "min-content" }}

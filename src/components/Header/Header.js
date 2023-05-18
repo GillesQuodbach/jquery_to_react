@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
 import s from "./style.module.css";
 import { NavLink, useLocation } from "react-router-dom";
-import { Button, colors } from "@mui/material";
-
+import { Button } from "@mui/material";
 function Header() {
   const location = useLocation();
   const currentLocation = location.pathname;

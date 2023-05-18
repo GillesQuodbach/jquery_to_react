@@ -1,5 +1,3 @@
-import { format } from "date-fns";
-
 export const COLUMNS = [
   {
     Header: "First Name",
@@ -15,9 +13,6 @@ export const COLUMNS = [
     Header: "Start Date",
     Footer: "Start Date",
     accessor: "start_date",
-    // Cell: ({ value }) => {
-    //   return format(new Date(value), "dd/MM/yyyy");
-    // },
   },
   {
     Header: "Department",
@@ -28,9 +23,6 @@ export const COLUMNS = [
     Header: "Date of Birth",
     Footer: "Date of Birth",
     accessor: "date_of_birth",
-    // Cell: ({ value }) => {
-    //   return format(new Date(value), "dd/MM/yyyy");
-    // },
   },
   {
     Header: "Street",

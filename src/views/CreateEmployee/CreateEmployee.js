@@ -1,7 +1,6 @@
 import s from "./style.module.css";
 import "../../App.css";
 import "./CreateEmployee.css";
-import { v4 as uuidv4 } from "uuid";
 import { addEmployeeToTheStore } from "../../store/employees/employees-slice";
 import {
   Box,
@@ -10,7 +9,6 @@ import {
   Button,
   MenuItem,
   FormControl,
-  InputLabel,
 } from "@mui/material";
 import Modal from "../../components/Modal/Modal";
 import { useState } from "react";
@@ -19,11 +17,13 @@ import { useDispatch } from "react-redux";
 import { Controller, useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { format, parseISO } from "date-fns";
-import Select from "react-select";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 function CreateEmployee(props) {
   const [modal, setModal] = useState(false);
+  const [startDate, setStartDate] = useState(null);
+  const [dateOfBirth, setDateOfBirth] = useState(null);
+
   const Toggle = () => setModal(!modal);
   const form = useForm();
   const { register, control, handleSubmit, formState, reset } = form;
@@ -60,7 +60,7 @@ function CreateEmployee(props) {
 
   const selectStateList = statesList?.map((state, index) => {
     return (
-      <MenuItem key={uuidv4()} value={state.name}>
+      <MenuItem key={index} value={state.name}>
         {state.name}
       </MenuItem>
     );
@@ -68,14 +68,11 @@ function CreateEmployee(props) {
 
   const selectDepartmentList = departmentList?.map((department, index) => {
     return (
-      <MenuItem key={uuidv4()} value={department.value}>
+      <MenuItem key={index} value={department.value}>
         {department.name}
       </MenuItem>
     );
   });
-
-  const [startDate, setStartDate] = useState(null);
-  const [dateOfBirth, setDateOfBirth] = useState(null);
 
   return (
     <Box>
@@ -169,7 +166,7 @@ function CreateEmployee(props) {
           />
           <p className={s.input_error_message}>{errors.start_date?.message}</p>
           <fieldset className="address_fieldset">
-            <legend>Adress</legend>
+            <legend>Address</legend>
             <label htmlFor="street">Street</label>
             <TextField
               size="small"

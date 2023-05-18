@@ -1,19 +1,17 @@
 import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
 import {
   useTable,
   useSortBy,
   useGlobalFilter,
   usePagination,
 } from "react-table";
-import { COLUMNS, GROUPED_COLUMNS } from "./columns";
+import { COLUMNS } from "./columns";
 import "./EmployeesTable.css";
 import { GlobalFilter } from "./GlobalFilter";
-import { Button, colors } from "@mui/material";
+import { Button } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import TextField from "@mui/material/TextField";
 
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
@@ -40,7 +38,6 @@ export const EmployeesTable = () => {
     gotoPage,
     pageCount,
     setPageSize,
-    rows,
     prepareRow,
     state,
     setGlobalFilter,
@@ -64,16 +61,16 @@ export const EmployeesTable = () => {
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
         <table {...getTableProps()}>
           <thead className="table_head_row">
-            {headerGroups.map((headerGroup) => (
+            {headerGroups.map((headerGroup, index) => (
               <tr
                 className="table_head_first_row"
-                key={uuidv4()}
+                key={index}
                 {...headerGroup.getHeaderGroupProps()}
               >
-                {headerGroup.headers.map((column) => (
+                {headerGroup.headers.map((column, index) => (
                   <th
                     className="table_column_head_cell"
-                    key={uuidv4()}
+                    key={index}
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                   >
                     <div className="column_header_container">
@@ -98,15 +95,15 @@ export const EmployeesTable = () => {
             ))}
           </thead>
           <tbody className="table_body_container" {...getTableBodyProps()}>
-            {page.map((row) => {
+            {page.map((row, index) => {
               prepareRow(row);
               return (
-                <tr className="table_row" key={uuidv4()} {...row.getRowProps}>
+                <tr className="table_row" key={index} {...row.getRowProps}>
                   {row.cells.map((cell, index) => {
                     return (
                       <td
                         className="table_cell"
-                        key={uuidv4()}
+                        key={index}
                         {...cell.getCellProps()}
                       >
                         {cell.render("Cell")}
@@ -139,8 +136,8 @@ export const EmployeesTable = () => {
                 value={pageSize}
                 onChange={(e) => setPageSize(Number(e.target.value))}
               >
-                {[10, 25, 50].map((pageSize) => (
-                  <MenuItem key={uuidv4()} value={pageSize}>
+                {[10, 25, 50].map((pageSize, index) => (
+                  <MenuItem key={index} value={pageSize}>
                     Show {pageSize}
                   </MenuItem>
                 ))}
