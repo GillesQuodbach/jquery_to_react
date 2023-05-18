@@ -67,8 +67,8 @@ export const GlobalFilter = ({ filter, setFilter }) => {
         position="static"
         sx={{
           display: "flex",
-
-          backgroundColor: "#55608f",
+          borderRadius: "10px 10px 0 0",
+          backgroundColor: "rgba(0, 0, 0, 0.3)",
           boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
         }}
       >
@@ -84,6 +84,7 @@ export const GlobalFilter = ({ filter, setFilter }) => {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+              sx={{ color: "#000" }}
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
               value={filter || ""}

@@ -4,8 +4,9 @@
 
   width: 100vw;
   height: calc(100vh + 100px);
-  background: -webkit-linear-gradient(45deg, #49a09d, #5f2c82);
-  background: linear-gradient(45deg, #49a09d, #5f2c82);
+  /* background: -webkit-linear-gradient(45deg, #49a09d, #5f2c82);
+  background: linear-gradient(45deg, #49a09d, #5f2c82); */
+  background-color: #e2e1e1;
 }
 
 @media (max-width: 768px) {
@@ -27,4 +28,19 @@
 .address_fieldset {
   display: flex;
   flex-direction: column;
+  margin-top: 0.7rem;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  margin-bottom: 1rem;
+}
+
+legend {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+form button {
+  align-self: center;
+}
+
+form label {
+  margin-bottom: 0.4rem;
 }

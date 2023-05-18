@@ -19,6 +19,9 @@ function Header() {
             variant="contained"
             sx={{
               backgroundColor: "#333333",
+              "&:hover": {
+                backgroundColor: "#595959",
+              },
             }}
           >
             <NavLink className={s.header_link} to="/">
@@ -33,6 +36,9 @@ function Header() {
             variant="contained"
             sx={{
               backgroundColor: "#333333",
+              "&:hover": {
+                backgroundColor: "#595959",
+              },
             }}
           >
             <NavLink className={s.header_link} to="/list">

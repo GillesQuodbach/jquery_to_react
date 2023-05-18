@@ -130,7 +130,11 @@ export const EmployeesTable = () => {
             </div>
             <div className="pagination_select_page_dropdown_container">
               <Select
-                sx={{ backgroundColor: "#333333", height: "24px" }}
+                sx={{
+                  backgroundColor: "#333333",
+                  height: "24px",
+                  color: "#fff",
+                }}
                 className="pagination_select_page_dropdown"
                 value={pageSize}
                 onChange={(e) => setPageSize(Number(e.target.value))}
@@ -149,6 +153,10 @@ export const EmployeesTable = () => {
                 sx={{
                   minWidth: "fit-content",
                   height: "24px",
+                  backgroundColor: "#333333",
+                  "&:hover": {
+                    backgroundColor: "#595959",
+                  },
                 }}
                 variant="contained"
                 className="pagination_first_page"
@@ -158,7 +166,14 @@ export const EmployeesTable = () => {
                 {"<<"}
               </Button>
               <Button
-                sx={{ height: "24px", minWidth: "fit-content" }}
+                sx={{
+                  height: "24px",
+                  minWidth: "fit-content",
+                  backgroundColor: "#333333",
+                  "&:hover": {
+                    backgroundColor: "#595959",
+                  },
+                }}
                 variant="contained"
                 className="pagination_previous_page"
                 onClick={() => previousPage()}
@@ -169,7 +184,14 @@ export const EmployeesTable = () => {
             </div>
             <div className="next_button_container">
               <Button
-                sx={{ height: "24px", minWidth: "fit-content" }}
+                sx={{
+                  height: "24px",
+                  minWidth: "fit-content",
+                  backgroundColor: "#333333",
+                  "&:hover": {
+                    backgroundColor: "#595959",
+                  },
+                }}
                 variant="contained"
                 className="pagination_next_page"
                 onClick={() => nextPage()}
@@ -178,7 +200,14 @@ export const EmployeesTable = () => {
                 {">"}
               </Button>
               <Button
-                sx={{ height: "24px", minWidth: "fit-content" }}
+                sx={{
+                  height: "24px",
+                  minWidth: "fit-content",
+                  backgroundColor: "#333333",
+                  "&:hover": {
+                    backgroundColor: "#595959",
+                  },
+                }}
                 variant="contained"
                 className="pagination_last_page"
                 onClick={() => gotoPage(pageCount - 1)}

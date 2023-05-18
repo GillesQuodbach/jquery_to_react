@@ -37,7 +37,7 @@ function CreateEmployee(props) {
   const departmentList = useSelector(
     (store) => store.persistedReducers.departments
   );
-  console.log(departmentList[0].name);
+  // console.log(departmentList[0].name);
 
   const onSubmit = (data, e) => {
     e.preventDefault();
@@ -242,7 +242,18 @@ function CreateEmployee(props) {
             </TextField>
           </FormControl>
           <p className={s.input_error_message}>{errors.department?.message}</p>
-          <Button type="submit" variant="contained" className="clickMe">
+          <Button
+            sx={{
+              backgroundColor: "#333333",
+              marginTop: "1rem",
+              "&:hover": {
+                backgroundColor: "#595959",
+              },
+            }}
+            type="submit"
+            variant="contained"
+            className="clickMe"
+          >
             Save
           </Button>
         </form>
