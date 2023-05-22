@@ -20,7 +20,7 @@ import { format, parseISO } from "date-fns";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 function CreateEmployee(props) {
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(true);
   const [startDate, setStartDate] = useState(null);
   const [dateOfBirth, setDateOfBirth] = useState(null);
 

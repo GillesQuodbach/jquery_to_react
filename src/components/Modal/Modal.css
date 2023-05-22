@@ -15,7 +15,7 @@
 }
 
 .modal {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.5);
   width: calc(15rem + 15vw);
   height: auto;
   padding: 2rem;
@@ -60,7 +60,7 @@ svg :hover {
 .modal_content {
   border-bottom: 1px solid #dddddd;
   padding: 2rem 0;
-  color: green;
+  color: #fff;
   text-align: center;
   font-size: 1.5rem;
 }
@@ -75,6 +75,7 @@ svg :hover {
   float: right;
   padding: 0.5rem;
   border-radius: 8px;
+  color: #000 !important;
 }
 
 .submit {
@@ -102,4 +103,18 @@ svg :hover {
 
 .modalContainer.show .modal {
   transform: translateY(0);
+}
+
+.modalBackground {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(200, 200, 200, 0.35);
+  position: absolute;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  /*trasnfrom: translate(-50%, -50%)*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

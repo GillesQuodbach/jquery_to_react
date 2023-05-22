@@ -127,10 +127,20 @@ export const EmployeesTable = () => {
             </div>
             <div className="pagination_select_page_dropdown_container">
               <Select
+                MenuProps={{
+                  sx: {
+                    "&& .Mui-selected": {
+                      backgroundColor: "#bfbfbf",
+                    },
+                  },
+                }}
                 sx={{
                   backgroundColor: "#333333",
                   height: "24px",
                   color: "#fff",
+                  "& .MuiSelect-iconOutlined": {
+                    color: "#fff",
+                  },
                 }}
                 className="pagination_select_page_dropdown"
                 value={pageSize}

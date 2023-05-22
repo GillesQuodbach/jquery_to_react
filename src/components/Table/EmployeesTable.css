@@ -141,13 +141,17 @@ td {
   align-items: center;
 }
 
-.pagination_select_page_dropdown_container {
-  /* background-color: pink; */
-}
-
 .pagination_button_container {
   /* background-color: green; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-width: 1px !important;
+  border-color: black !important;
+}
+.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: black !important;
 }
