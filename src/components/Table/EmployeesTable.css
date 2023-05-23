@@ -155,3 +155,12 @@ td {
 .Mui-focused .MuiOutlinedInput-notchedOutline {
   border-color: black !important;
 }
+
+.no_data_container {
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px;
+}

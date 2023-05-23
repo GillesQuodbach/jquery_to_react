@@ -54,66 +54,78 @@ export const EmployeesTable = () => {
   );
 
   const { globalFilter, pageIndex, pageSize } = state;
+  console.log(page);
 
   return (
     <div className="global_table_container">
       <div className="table_container">
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
         <table {...getTableProps()}>
-          <thead className="table_head_row">
-            {headerGroups.map((headerGroup, index) => (
-              <tr
-                className="table_head_first_row"
-                key={index}
-                {...headerGroup.getHeaderGroupProps()}
-              >
-                {headerGroup.headers.map((column, index) => (
-                  <th
-                    className="table_column_head_cell"
+          {page.length === 0 ? (
+            <tbody className="no_data_container">
+              <tr className="no_data_content">No employee was found</tr>
+            </tbody>
+          ) : (
+            <>
+              <thead className="table_head_row">
+                {headerGroups.map((headerGroup, index) => (
+                  <tr
+                    className="table_head_first_row"
                     key={index}
-                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                    {...headerGroup.getHeaderGroupProps()}
                   >
-                    <div className="column_header_container">
-                      <div className="column_header_text">
-                        {column.render("Header")}
-                      </div>
-                      <div className="column_header_arrow">
-                        {column.isSorted ? (
-                          column.isSortedDesc ? (
-                            <ArrowDownwardIcon />
-                          ) : (
-                            <ArrowUpwardIcon />
-                          )
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                    </div>
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody className="table_body_container" {...getTableBodyProps()}>
-            {page.map((row, index) => {
-              prepareRow(row);
-              return (
-                <tr className="table_row" key={index} {...row.getRowProps}>
-                  {row.cells.map((cell, index) => {
-                    return (
-                      <td
-                        className="table_cell"
+                    {headerGroup.headers.map((column, index) => (
+                      <th
+                        className="table_column_head_cell"
                         key={index}
-                        {...cell.getCellProps()}
+                        {...column.getHeaderProps(
+                          column.getSortByToggleProps()
+                        )}
                       >
-                        {cell.render("Cell")}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
+                        <div className="column_header_container">
+                          <div className="column_header_text">
+                            {column.render("Header")}
+                          </div>
+                          <div className="column_header_arrow">
+                            {column.isSorted ? (
+                              column.isSortedDesc ? (
+                                <ArrowDownwardIcon />
+                              ) : (
+                                <ArrowUpwardIcon />
+                              )
+                            ) : (
+                              ""
+                            )}
+                          </div>
+                        </div>
+                      </th>
+                    ))}
+                  </tr>
+                ))}
+              </thead>
+
+              <tbody className="table_body_container" {...getTableBodyProps()}>
+                {page.map((row, index) => {
+                  prepareRow(row);
+                  return (
+                    <tr className="table_row" key={index} {...row.getRowProps}>
+                      {row.cells.map((cell, index) => {
+                        return (
+                          <td
+                            className="table_cell"
+                            key={index}
+                            {...cell.getCellProps()}
+                          >
+                            {cell.render("Cell")}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </>
+          )}
         </table>
         <div className="pagination_container">
           <div className="page_container">
