@@ -1,4 +1,3 @@
-import s from "./style.module.css";
 import "../../App.css";
 import "./CreateEmployee.css";
 import { addEmployeeToTheStore } from "../../store/employees/employees-slice";
@@ -76,14 +75,14 @@ function CreateEmployee(props) {
 
   return (
     <Box>
-      <Box className={s.create_employee_container}>
-        <Typography variant="h5" className={s.create_employee_title}>
+      <Box className="create_employee_container">
+        <Typography variant="h5" className="create_employee_title">
           Create Employee
         </Typography>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className={s.form_container}
+          className="form_container"
           noValidate
         >
           <label htmlFor="first_name">First Name</label>
@@ -96,7 +95,7 @@ function CreateEmployee(props) {
               required: "First name is required",
             })}
           />
-          <p className={s.input_error_message}>{errors.first_name?.message}</p>
+          <p className="input_error_message">{errors.first_name?.message}</p>
           <label htmlFor="last_name">Last Name</label>
           <TextField
             size="small"
@@ -107,7 +106,7 @@ function CreateEmployee(props) {
               required: "Last name is required",
             })}
           />
-          <p className={s.input_error_message}>{errors.last_name?.message}</p>
+          <p className="input_error_message">{errors.last_name?.message}</p>
           <label htmlFor="date_of_birth">Date of Birth</label>
           <Controller
             name="date_of_birth"
@@ -136,9 +135,7 @@ function CreateEmployee(props) {
             )}
           />
 
-          <p className={s.input_error_message}>
-            {errors.date_of_birth?.message}
-          </p>
+          <p className="input_error_message">{errors.date_of_birth?.message}</p>
           <label htmlFor="start_date">Start Date</label>
           <Controller
             name="start_date"
@@ -164,7 +161,7 @@ function CreateEmployee(props) {
               />
             )}
           />
-          <p className={s.input_error_message}>{errors.start_date?.message}</p>
+          <p className="input_error_message">{errors.start_date?.message}</p>
           <fieldset className="address_fieldset">
             <legend>Address</legend>
             <label htmlFor="street">Street</label>
@@ -177,7 +174,7 @@ function CreateEmployee(props) {
                 required: "Street is required",
               })}
             />
-            <p className={s.input_error_message}>{errors.street?.message}</p>
+            <p className="input_error_message">{errors.street?.message}</p>
             <label htmlFor="city">City</label>
             <TextField
               size="small"
@@ -188,7 +185,7 @@ function CreateEmployee(props) {
                 required: "City is required",
               })}
             />
-            <p className={s.input_error_message}>{errors.city?.message}</p>
+            <p className="input_error_message">{errors.city?.message}</p>
             <label htmlFor="state">State</label>
             <FormControl>
               <TextField
@@ -207,7 +204,7 @@ function CreateEmployee(props) {
                 {selectStateList}
               </TextField>
             </FormControl>
-            <p className={s.input_error_message}>{errors.state?.message}</p>
+            <p className="input_error_message">{errors.state?.message}</p>
             <label htmlFor="zip_code">Zip Code</label>
             <TextField
               size="small"
@@ -218,7 +215,7 @@ function CreateEmployee(props) {
                 required: "Zip code is required",
               })}
             />
-            <p className={s.input_error_message}>{errors.zip_code?.message}</p>
+            <p className="input_error_message">{errors.zip_code?.message}</p>
           </fieldset>
           <label htmlFor="department">Department</label>
           <FormControl sx={{ width: "70%" }}>
@@ -238,7 +235,7 @@ function CreateEmployee(props) {
               {selectDepartmentList}
             </TextField>
           </FormControl>
-          <p className={s.input_error_message}>{errors.department?.message}</p>
+          <p className="input_error_message">{errors.department?.message}</p>
           <Button
             sx={{
               backgroundColor: "#333333",

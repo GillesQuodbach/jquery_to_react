@@ -1,5 +1,3 @@
-import s from "./style.module.css";
-
 import React from "react";
 
 function PageNotFound(props) {
