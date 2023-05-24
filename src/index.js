@@ -10,6 +10,7 @@ import EmployeeList from "./views/EmployeeList/EmployeeList";
 import { Provider } from "react-redux";
 import { store, persistor } from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
+import Header from "./components/Header/Header";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,6 +18,7 @@ root.render(
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <BrowserRouter>
+          <Header />
           <Routes>
             <Route path="/" element={<App />}>
               <Route path="/" element={<CreateEmployee />} />
