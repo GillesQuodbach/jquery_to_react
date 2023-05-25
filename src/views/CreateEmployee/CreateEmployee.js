@@ -19,10 +19,10 @@ import { format, parseISO } from "date-fns";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 function CreateEmployee(props) {
-  const [modal, setModal] = useState(true);
   const [startDate, setStartDate] = useState(null);
   const [dateOfBirth, setDateOfBirth] = useState(null);
 
+  const [modal, setModal] = useState(true);
   const Toggle = () => setModal(!modal);
   const form = useForm();
   const { register, control, handleSubmit, formState, reset } = form;
