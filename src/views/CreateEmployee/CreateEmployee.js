@@ -59,7 +59,7 @@ function CreateEmployee(props) {
 
   const selectStateList = statesList?.map((state, index) => {
     return (
-      <MenuItem key={index} value={state.name}>
+      <MenuItem data-testid="select" key={index} value={state.name}>
         {state.name}
       </MenuItem>
     );
@@ -67,7 +67,11 @@ function CreateEmployee(props) {
 
   const selectDepartmentList = departmentList?.map((department, index) => {
     return (
-      <MenuItem key={index} value={department.value}>
+      <MenuItem
+        data-testid="department-options"
+        key={index}
+        value={department.value}
+      >
         {department.name}
       </MenuItem>
     );
@@ -117,6 +121,7 @@ function CreateEmployee(props) {
             }}
             render={({ field }) => (
               <DatePicker
+                inputProps={{ "aria-label": "example" }}
                 defaultValue={null}
                 views={["year", "month", "day"]}
                 format="dd/MM/yyyy"
@@ -204,7 +209,9 @@ function CreateEmployee(props) {
                 {selectStateList}
               </TextField>
             </FormControl>
-            <p className="input_error_message">{errors.state?.message}</p>
+            <p className="input_error_message" data-testid="error_message">
+              {errors.state?.message}
+            </p>
             <label htmlFor="zip_code">Zip Code</label>
             <TextField
               size="small"
@@ -220,6 +227,7 @@ function CreateEmployee(props) {
           <label htmlFor="department">Department</label>
           <FormControl sx={{ width: "70%" }}>
             <TextField
+              data-testid="select_department"
               size="small"
               InputLabelProps={{ shrink: false }}
               // defaultValue={departmentList[0].value}
@@ -237,6 +245,7 @@ function CreateEmployee(props) {
           </FormControl>
           <p className="input_error_message">{errors.department?.message}</p>
           <Button
+            data-testid="submit-button"
             sx={{
               backgroundColor: "#333333",
               marginTop: "1rem",
