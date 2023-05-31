@@ -88,3 +88,52 @@ describe("Form should render correctly", () => {
     expect(mockOnSubmit).not.toHaveBeenCalled();
   });
 });
+
+function setup(jsx) {
+  return {
+    user: userEvent.setup(),
+    ...render(jsx),
+  };
+}
+it("should validate form fields", async () => {
+  const mockSave = jest.fn();
+  const { user } = setup(customRender(<CreateEmployee saveData={mockSave} />));
+
+  await user.type(
+    screen.getByRole("textbox", { name: /first name/i }),
+    "FirstName"
+  );
+  await user.type(
+    screen.getByRole("textbox", { name: /last name/i }),
+    "LastName"
+  );
+  const birthDateInput = screen.getByTestId("birth-date-picker-input");
+  userEvent.type(birthDateInput, "20/02/2020");
+  const chosenDate = screen.getByTestId("birth-date-picker-input", {
+    value: "Oct 30, 2019",
+  });
+  fireEvent.click(chosenDate);
+  // expect(chosenDate).toHaveValue("");
+
+  await user.type(screen.getByTestId("start-date-picker-input"), "20/02/2020");
+
+  await user.type(screen.getByRole("textbox", { name: /street/i }), "Street");
+  await user.type(screen.getByRole("textbox", { name: /city/i }), "City");
+  await user.type(
+    screen.getByRole("spinbutton", { name: /zip code/i }),
+    "64120"
+  );
+
+  const submitButton = screen.getByTestId("submit-button");
+  user.click(submitButton);
+  // const inputFirstName = await screen.findByText("First name is required");
+  // await screen.findByText("First name is required");
+  // expect(inputFirstName).toBeInTheDocument();
+  expect(mockSave).not.toBeCalled();
+});
+
+test("Department dropdown should render correctly", () => {
+  document.body.innerHTML = "<div id=modal></div>";
+  customRender(<CreateEmployee />);
+  expect(screen.getByTestId("select_department")).toBeInTheDocument();
+});

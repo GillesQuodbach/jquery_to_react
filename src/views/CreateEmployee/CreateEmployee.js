@@ -18,11 +18,11 @@ import { DevTool } from "@hookform/devtools";
 import { format, parseISO } from "date-fns";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-function CreateEmployee(props) {
+function CreateEmployee({ saveData }) {
   const [startDate, setStartDate] = useState(null);
   const [dateOfBirth, setDateOfBirth] = useState(null);
 
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
   const Toggle = () => setModal(!modal);
   const form = useForm();
   const { register, control, handleSubmit, formState, reset } = form;
@@ -31,17 +31,12 @@ function CreateEmployee(props) {
 
   //React Select Component
   const statesList = useSelector((store) => store.persistedReducers.states);
-  // consolelog("****state****", statesList);
-
   const departmentList = useSelector(
     (store) => store.persistedReducers.departments
   );
-  // console.log(departmentList[0].name);
-
   const onSubmit = (data, e) => {
+    saveData(data);
     e.preventDefault();
-
-    //Employee infos
     data.start_date = format(
       parseISO(data.start_date.toISOString()),
       `dd/MM/yyyy`
@@ -50,7 +45,6 @@ function CreateEmployee(props) {
       parseISO(data.date_of_birth.toISOString()),
       `dd/MM/yyyy`
     );
-
     console.log(data);
     dispatch(addEmployeeToTheStore(data));
     reset();
@@ -85,6 +79,7 @@ function CreateEmployee(props) {
         </Typography>
 
         <form
+          data-testid="form"
           onSubmit={handleSubmit(onSubmit)}
           className="form_container"
           noValidate
@@ -121,7 +116,6 @@ function CreateEmployee(props) {
             }}
             render={({ field }) => (
               <DatePicker
-                inputProps={{ "aria-label": "example" }}
                 defaultValue={null}
                 views={["year", "month", "day"]}
                 format="dd/MM/yyyy"
@@ -133,6 +127,7 @@ function CreateEmployee(props) {
                 slotProps={{
                   textField: {
                     variant: "outlined",
+                    "data-testid": "birth-date-picker-input",
                   },
                 }}
                 {...field}
@@ -160,7 +155,10 @@ function CreateEmployee(props) {
                   setStartDate(newValue);
                 }}
                 slotProps={{
-                  textField: { variant: "outlined" },
+                  textField: {
+                    variant: "outlined",
+                    "data-testid": "start-date-picker-input",
+                  },
                 }}
                 {...field}
               />
@@ -227,7 +225,6 @@ function CreateEmployee(props) {
           <label htmlFor="department">Department</label>
           <FormControl sx={{ width: "70%" }}>
             <TextField
-              data-testid="select_department"
               size="small"
               InputLabelProps={{ shrink: false }}
               // defaultValue={departmentList[0].value}
@@ -236,6 +233,9 @@ function CreateEmployee(props) {
               defaultValue=""
               type="text"
               id="department"
+              inputProps={{
+                "data-testid": "select_department",
+              }}
               {...register("department", {
                 required: "Department is required",
               })}
@@ -268,6 +268,7 @@ function CreateEmployee(props) {
         title={"HRNet"}
         children={"Employee successfully added "}
       />
+      <Button onClick={() => Toggle()}>Display modal</Button>
     </Box>
   );
 }

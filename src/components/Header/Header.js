@@ -1,4 +1,4 @@
-import s from "./style.module.css";
+import "./Header.css";
 import { NavLink, useLocation } from "react-router-dom";
 import { Button } from "@mui/material";
 function Header() {
@@ -6,12 +6,10 @@ function Header() {
   const currentLocation = location.pathname;
 
   return (
-    <div className={s.header_container}>
+    <div className={"header_container"}>
       {currentLocation === "/list" ? (
         <>
-          <h1 className={`${s.header_title} ${s.header_title_table}`}>
-            Current Employees
-          </h1>
+          <h1 className="header_title header_title_table">Current Employees</h1>
 
           <Button
             variant="contained"
@@ -22,14 +20,14 @@ function Header() {
               },
             }}
           >
-            <NavLink className={s.header_link} to="/">
+            <NavLink className={"header_link"} to="/">
               Home
             </NavLink>
           </Button>
         </>
       ) : (
         <>
-          <h1 className={`${s.header_title} ${s.header_title_home}`}>HRnet</h1>
+          <h1 className="header_title header_title_home">HRnet</h1>
           <Button
             variant="contained"
             sx={{
@@ -39,7 +37,7 @@ function Header() {
               },
             }}
           >
-            <NavLink className={s.header_link} to="/list">
+            <NavLink className="header_link" to="/list">
               View Current Employees
             </NavLink>
           </Button>
