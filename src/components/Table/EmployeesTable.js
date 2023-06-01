@@ -60,73 +60,92 @@ export const EmployeesTable = () => {
     <div className="global_table_container">
       <div className="table_container">
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-        <table {...getTableProps()}>
-          {page.length === 0 ? (
-            <tbody className="no_data_container">
-              <tr className="no_data_content">No employee was found</tr>
-            </tbody>
-          ) : (
-            <>
-              <thead className="table_head_row">
-                {headerGroups.map((headerGroup, index) => (
-                  <tr
-                    className="table_head_first_row"
-                    key={index}
-                    {...headerGroup.getHeaderGroupProps()}
-                  >
-                    {headerGroup.headers.map((column, index) => (
-                      <th
-                        className="table_column_head_cell"
-                        key={index}
-                        {...column.getHeaderProps(
-                          column.getSortByToggleProps()
-                        )}
-                      >
-                        <div className="column_header_container">
-                          <div className="column_header_text">
-                            {column.render("Header")}
-                          </div>
-                          <div className="column_header_arrow">
-                            {column.isSorted ? (
-                              column.isSortedDesc ? (
-                                <ArrowDownwardIcon />
-                              ) : (
-                                <ArrowUpwardIcon />
-                              )
-                            ) : (
-                              ""
-                            )}
-                          </div>
-                        </div>
-                      </th>
-                    ))}
-                  </tr>
-                ))}
-              </thead>
-
-              <tbody className="table_body_container" {...getTableBodyProps()}>
-                {page.map((row, index) => {
-                  prepareRow(row);
-                  return (
-                    <tr className="table_row" key={index} {...row.getRowProps}>
-                      {row.cells.map((cell, index) => {
-                        return (
-                          <td
-                            className="table_cell"
-                            key={index}
-                            {...cell.getCellProps()}
-                          >
-                            {cell.render("Cell")}
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  );
-                })}
+        <div className="table_scroll_container">
+          <table {...getTableProps()}>
+            {page.length === 0 ? (
+              <tbody className="table_body_container no_data_container">
+                <tr className="no_data_content">No employee was found</tr>
               </tbody>
-            </>
-          )}
-        </table>
+            ) : (
+              <>
+                <thead className="table_head_row">
+                  {headerGroups.map((headerGroup, index) => (
+                    <tr
+                      className="table_head_first_row"
+                      key={index}
+                      {...headerGroup.getHeaderGroupProps()}
+                    >
+                      {headerGroup.headers.map((column, index) => (
+                        <th
+                          className="table_column_head_cell"
+                          key={index}
+                          {...column.getHeaderProps(
+                            column.getSortByToggleProps()
+                          )}
+                        >
+                          <div className="column_header_container">
+                            <div className="column_header_text">
+                              {column.render("Header")}
+                            </div>
+                            <div className="column_header_arrow">
+                              {column.isSorted ? (
+                                column.isSortedDesc ? (
+                                  <ArrowDownwardIcon
+                                    sx={{
+                                      fontSize: "1.1rem",
+                                      marginLeft: "10px",
+                                    }}
+                                  />
+                                ) : (
+                                  <ArrowUpwardIcon
+                                    sx={{
+                                      fontSize: "1.1rem",
+                                      marginLeft: "10px",
+                                    }}
+                                  />
+                                )
+                              ) : (
+                                ""
+                              )}
+                            </div>
+                          </div>
+                        </th>
+                      ))}
+                    </tr>
+                  ))}
+                </thead>
+
+                <tbody
+                  className="table_body_container"
+                  {...getTableBodyProps()}
+                >
+                  {page.map((row, index) => {
+                    prepareRow(row);
+                    return (
+                      <tr
+                        className="table_row"
+                        key={index}
+                        {...row.getRowProps}
+                      >
+                        {row.cells.map((cell, index) => {
+                          return (
+                            <td
+                              className="table_cell"
+                              key={index}
+                              {...cell.getCellProps()}
+                            >
+                              {cell.render("Cell")}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </>
+            )}
+          </table>
+        </div>
         <div className="pagination_container">
           <div className="page_container">
             <div className="pagination_pages_container">

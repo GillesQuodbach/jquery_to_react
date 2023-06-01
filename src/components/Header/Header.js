@@ -1,6 +1,7 @@
 import "./Header.css";
 import { NavLink, useLocation } from "react-router-dom";
 import { Button } from "@mui/material";
+import logo from "../../assests/logo.jpg";
 function Header() {
   const location = useLocation();
   const currentLocation = location.pathname;
@@ -9,7 +10,7 @@ function Header() {
     <div className={"header_container"}>
       {currentLocation === "/list" ? (
         <>
-          <h1 className="header_title header_title_table">Current Employees</h1>
+          <img className="logo" src={logo} alt="logo" />
 
           <Button
             variant="contained"
@@ -27,7 +28,7 @@ function Header() {
         </>
       ) : (
         <>
-          <h1 className="header_title header_title_home">HRnet</h1>
+          <img className="logo" src={logo} alt="logo" />
           <Button
             variant="contained"
             sx={{

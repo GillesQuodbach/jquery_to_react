@@ -11,9 +11,9 @@ import SearchIcon from "@mui/icons-material/Search";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: alpha(theme.palette.common.white, 0.9),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.white, 0.7),
   },
   marginLeft: 0,
   width: "100%",
@@ -61,10 +61,11 @@ export const GlobalFilter = ({ filter, setFilter }) => {
         sx={{
           display: "flex",
           borderRadius: "10px 10px 0 0",
-          backgroundColor: "rgba(0, 0, 0, 0.3)",
+          backgroundColor: "rgba(147, 173, 24, 0.8)",
           boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
         }}
       >
+        <h1 className="header_title header_title_table">Current Employees</h1>
         <Toolbar
           sx={{
             display: "flex",

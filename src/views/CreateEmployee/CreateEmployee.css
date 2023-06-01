@@ -1,28 +1,7 @@
-#root {
-  padding-left: 32px;
-  padding-right: 32px;
-
-  width: 100vw;
-  min-height: calc(100vh + 100px);
-  /* background: -webkit-linear-gradient(45deg, #49a09d, #5f2c82);
-  background: linear-gradient(45deg, #49a09d, #5f2c82); */
-  background-color: #e2e1e1;
-}
-
-@media (max-width: 768px) {
-  #root {
-    padding-left: 16px;
-    padding-right: 16px;
-    height: calc(100vh + 400px);
-  }
-}
-
-@media (min-width: 769px) {
-  #root {
-    padding-left: 32px;
-    padding-right: 32px;
-    height: calc(100vh + 400px);
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 .address_fieldset {
@@ -53,14 +32,16 @@ form label {
 }
 
 .create_employee_title {
-  color: #000;
-  font-weight: 500;
-  background-color: #fff;
+  font-size: 1rem;
+  color: #212427;
+  font-weight: 00;
+  background-color: rgba(147, 173, 24, 0.8);
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 20px;
   padding-right: 20px;
   border-radius: 10px 10px 0px 0px;
+  margin: 0;
 }
 
 .form_container {
@@ -68,12 +49,22 @@ form label {
   padding: 25px;
   background-color: #fff;
   width: max-content;
+  border: 1px solid rgba(147, 173, 24, 0.8);
   border-radius: 20px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  color: #212427;
+  font-weight: 500;
+}
+
+.input_error_message {
+  color: red;
+  font-weight: 500;
+  font-size: 0.8rem;
+  margin-top: 5px;
 }
 
 @media (max-width: 320px) {
@@ -82,41 +73,48 @@ form label {
   }
 }
 
-/* .form_container label {
-  margin-bottom: 5px;
-  color: #fff;
-  font-size: 1.1rem;
-  font-weight: 500;
-} */
-
-/* .form_container legend {
-  margin-bottom: 5px;
-  color: #fff;
-  font-size: 1.3rem;
-  font-weight: 300;
+@media (max-width: 768px) {
+  #root {
+    height: calc(100vh + 250px);
+  }
 }
 
-.form_container fieldset {
-  border: 2px solid #fff;
-  margin-top: 10px;
-  margin-bottom: 15px;
-  display: flex;
-  flex-direction: column;
-} */
+@media (min-width: 768px) {
+  #root {
+    padding-left: 16px;
+    padding-right: 16px;
+    height: calc(100vh + 400px);
+  }
+  .form_container {
+    min-width: 500px;
+  }
+  form label {
+    font-size: 1.3rem;
+  }
+  .input_error_message {
+    font-weight: 500;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  .address_fieldset {
+    width: 100%;
+  }
+  .create_employee_title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10px 10px 0px 0px;
+    margin: 0;
+  }
+}
 
-/* .form_container input,
-select {
-  margin-bottom: 10px;
-} */
-
-/* .form_container button {
-  align-self: center;
-  margin-top: 15px;
-} */
-
-.input_error_message {
-  color: red;
-  font-weight: 500;
-  font-size: 0.8rem;
-  margin-top: 0;
+@media (min-width: 769px) {
+  #root {
+    padding-left: 32px;
+    padding-right: 32px;
+    height: calc(100vh + 400px);
+  }
 }

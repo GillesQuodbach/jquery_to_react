@@ -18,9 +18,13 @@
 /* Container */
 .table_container {
   max-width: 90vh;
-  height: 750px;
-  /* max-width: 575px; */
-  overflow-x: auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.header_title_table {
+  color: #212427;
+  padding-top: 10px;
+  margin: 0;
 }
 
 .table tr {
@@ -32,6 +36,7 @@ table {
   font-size: 0.8rem;
 
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  background-color: rgba(147, 173, 24, 0.8);
 }
 
 thead {
@@ -47,7 +52,7 @@ thead {
 th,
 td {
   background-color: #fff;
-  color: #000;
+  color: #212427;
   padding: 10px;
 }
 
@@ -93,13 +98,17 @@ td {
   display: flex;
   flex-direction: row;
   width: 100%;
+
   position: static;
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
   color: #000;
-  padding: 10px;
+  padding: 16px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   border-radius: 0 0 10px 10px;
+  background-color: rgba(147, 173, 24, 0.8);
 }
 
 .page_container {
@@ -116,6 +125,13 @@ td {
 }
 
 @media (max-width: 425px) {
+  .table_scroll_container {
+    overflow-x: scroll;
+  }
+  .table_container {
+    max-width: 425px;
+    overflow-x: auto;
+  }
   .pagination_container {
     flex-direction: column;
     justify-content: space-between;
@@ -142,7 +158,6 @@ td {
 }
 
 .pagination_button_container {
-  /* background-color: green; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;

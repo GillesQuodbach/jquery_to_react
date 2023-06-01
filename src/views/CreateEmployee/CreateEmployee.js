@@ -74,9 +74,7 @@ function CreateEmployee({ saveData }) {
   return (
     <Box>
       <Box className="create_employee_container">
-        <Typography variant="h5" className="create_employee_title">
-          Create Employee
-        </Typography>
+        <p className="create_employee_title">Create Employee</p>
 
         <form
           data-testid="form"
@@ -86,6 +84,7 @@ function CreateEmployee({ saveData }) {
         >
           <label htmlFor="first_name">First Name</label>
           <TextField
+            sx={{ width: "100%" }}
             size="small"
             // defaultValue={"test"}
             type="text"
@@ -97,6 +96,7 @@ function CreateEmployee({ saveData }) {
           <p className="input_error_message">{errors.first_name?.message}</p>
           <label htmlFor="last_name">Last Name</label>
           <TextField
+            sx={{ width: "100%" }}
             size="small"
             // defaultValue={"test"}
             type="text"
@@ -116,6 +116,7 @@ function CreateEmployee({ saveData }) {
             }}
             render={({ field }) => (
               <DatePicker
+                sx={{ width: "100%" }}
                 defaultValue={null}
                 views={["year", "month", "day"]}
                 format="dd/MM/yyyy"
@@ -146,6 +147,7 @@ function CreateEmployee({ saveData }) {
             }}
             render={({ field }) => (
               <DatePicker
+                sx={{ width: "100%" }}
                 defaultValue={startDate}
                 views={["year", "month", "day"]}
                 format="dd/MM/yyyy"
@@ -169,6 +171,7 @@ function CreateEmployee({ saveData }) {
             <legend>Address</legend>
             <label htmlFor="street">Street</label>
             <TextField
+              sx={{ width: "100%" }}
               size="small"
               // defaultValue={"test"}
               type="text"
@@ -192,6 +195,7 @@ function CreateEmployee({ saveData }) {
             <label htmlFor="state">State</label>
             <FormControl>
               <TextField
+                sx={{ width: "100%" }}
                 size="small"
                 InputLabelProps={{ shrink: false }}
                 // defaultValue={statesList[0].name}
@@ -212,6 +216,7 @@ function CreateEmployee({ saveData }) {
             </p>
             <label htmlFor="zip_code">Zip Code</label>
             <TextField
+              sx={{ width: "100%" }}
               size="small"
               // defaultValue={"6767"}
               type="number"
@@ -223,8 +228,9 @@ function CreateEmployee({ saveData }) {
             <p className="input_error_message">{errors.zip_code?.message}</p>
           </fieldset>
           <label htmlFor="department">Department</label>
-          <FormControl sx={{ width: "70%" }}>
+          <FormControl sx={{ width: "100%" }}>
             <TextField
+              sx={{ width: "100%" }}
               size="small"
               InputLabelProps={{ shrink: false }}
               // defaultValue={departmentList[0].value}
@@ -268,7 +274,6 @@ function CreateEmployee({ saveData }) {
         title={"HRNet"}
         children={"Employee successfully added "}
       />
-      <Button onClick={() => Toggle()}>Display modal</Button>
     </Box>
   );
 }
