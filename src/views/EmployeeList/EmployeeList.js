@@ -1,7 +1,7 @@
 import React from "react";
 import { EmployeesTable } from "../../components/Table/EmployeesTable";
 
-function EmployeeList(props) {
+function EmployeeList() {
   return <EmployeesTable />;
 }
 
