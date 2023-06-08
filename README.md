@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# HRnet
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Projet 14 - Faites passer une librairie jQuery vers React
 
-## Available Scripts
+## Author
 
-In the project directory, you can run:
+- Gilles QUODBACH
 
-### `npm start`
+## Technologies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [![React-v_18.2.0](https://img.shields.io/badge/React-v_18.2.0-blue)](https://fr.reactjs.org/)
+- [![React-Router-v_6.10.0](https://img.shields.io/badge/React_Router-v_6.10.0-green)](https://reactrouter.com/docs/en/v6)
+- [![React-table-v_7.8.0](https://img.shields.io/badge/React_Table_Component-v_7.8.0-blueviolet)](https://www.npmjs.com/package/react-table)
+- [![Material-UI-v_5.12.1](https://img.shields.io/badge/Material--UI-Material--UI--v__5.12.1-red)](https://mui.com/x/react-date-pickers/date-picker/)
+- [![Material-UI-datepicker-v_6.3.1](https://img.shields.io/badge/React_Datepicker-v_4.7.0-57CC99)](https://mui.com/x/react-date-pickers/date-picker/)
+- [![React-Redux](https://img.shields.io/badge/React_redux-v_8.0.5-C7F9CC)](https://react-redux.js.org/)
+- [![Redux-Persist](https://img.shields.io/badge/Redux--Persist-Redux--Persist--v__6.0.0%20-yellow)](https://github.com/rt2zz/redux-persist.git)
+- [![React-Hook-Form](https://img.shields.io/badge/React--Hook--Form-React--Hook--Form--v__7.43.9-orange)](https://react-hook-form.com/)
+- [![Date-Fns](https://img.shields.io/badge/Date--Fns-Date--Fns--v__2.30.0-ff69b4)](https://date-fns.org/)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Environments
 
-### `npm test`
+https://github.com/GillesQuodbach/jquery_to_react.git
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+https://www.npmjs.com/package/hrnet-modal-plugin
 
-### `npm run build`
+## Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Clone the repository:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`git clone https://github.com/GillesQuodbach/jquery_to_react.git`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Move inside the cloned repository folder and run:
 
-### `npm run eject`
+`npm install`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+to install all dependencies and then run:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+`npm start`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The app is now rendered at `http://localhost:3000`
