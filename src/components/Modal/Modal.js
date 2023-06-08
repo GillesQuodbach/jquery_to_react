@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import "./Modal.css";
 import { Button } from "@mui/material";
@@ -47,6 +48,13 @@ const Modal = ({ show, close, title, children }) => {
     </div>,
     document.getElementById("modal")
   );
+};
+
+Modal.propTypes = {
+  show: PropTypes.string,
+  close: PropTypes.bool,
+  title: PropTypes.string,
+  children: PropTypes.string,
 };
 
 export default Modal;
