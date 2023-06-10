@@ -4,6 +4,10 @@ import "./Modal.css";
 import { Button } from "@mui/material";
 
 const Modal = ({ show, close, title, children }) => {
+  console.log("show", typeof show);
+  console.log("close", typeof close);
+  console.log("title", typeof title);
+  console.log("children", typeof children);
   return ReactDOM.createPortal(
     <div
       className={`modalContainer ${show ? "show" : ""}`}
@@ -48,6 +52,13 @@ const Modal = ({ show, close, title, children }) => {
     </div>,
     document.getElementById("modal")
   );
+};
+
+Modal.propTypes = {
+  show: PropTypes.bool,
+  close: PropTypes.func,
+  title: PropTypes.string,
+  children: PropTypes.string,
 };
 
 export default Modal;
