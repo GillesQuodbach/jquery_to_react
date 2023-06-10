@@ -22,7 +22,7 @@ function CreateEmployee({ saveData }) {
   const [startDate, setStartDate] = useState(null);
   const [dateOfBirth, setDateOfBirth] = useState(null);
 
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
   const Toggle = () => setModal(!modal);
   const form = useForm();
   const { register, control, handleSubmit, formState, reset } = form;
