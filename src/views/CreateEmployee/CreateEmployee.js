@@ -21,6 +21,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 function CreateEmployee({ saveData }) {
   const [startDate, setStartDate] = useState(null);
   const [dateOfBirth, setDateOfBirth] = useState(null);
+  console.log(saveData);
 
   const [modal, setModal] = useState(false);
   const Toggle = () => setModal(!modal);

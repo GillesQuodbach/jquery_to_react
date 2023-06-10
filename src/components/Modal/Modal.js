@@ -50,11 +50,4 @@ const Modal = ({ show, close, title, children }) => {
   );
 };
 
-Modal.propTypes = {
-  show: PropTypes.string,
-  close: PropTypes.bool,
-  title: PropTypes.string,
-  children: PropTypes.string,
-};
-
 export default Modal;
