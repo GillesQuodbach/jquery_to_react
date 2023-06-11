@@ -339,8 +339,6 @@ export const employeesSlice = createSlice({
   reducers: {
     addEmployeeToTheStore: (currentSlice, action) => {
       currentSlice.push(action.payload);
-      console.log("addEmployee");
-      console.log(action);
     },
   },
 });

@@ -1,15 +1,7 @@
 import "../../App.css";
 import "./CreateEmployee.css";
 import { addEmployeeToTheStore } from "../../store/employees/employees-slice";
-import {
-  Box,
-  TextField,
-  Typography,
-  Button,
-  MenuItem,
-  FormControl,
-} from "@mui/material";
-import Modal from "../../components/Modal/Modal";
+import { Box, TextField, Button, MenuItem, FormControl } from "@mui/material";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -18,13 +10,15 @@ import { DevTool } from "@hookform/devtools";
 import { format, parseISO } from "date-fns";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-function CreateEmployee({ saveData }) {
+import { Modal } from "hrnet-modal-plugin";
+
+function CreateEmployee() {
   const [startDate, setStartDate] = useState(null);
   const [dateOfBirth, setDateOfBirth] = useState(null);
-  console.log(saveData);
 
   const [modal, setModal] = useState(false);
   const Toggle = () => setModal(!modal);
+
   const form = useForm();
   const { register, control, handleSubmit, formState, reset } = form;
   const { errors } = formState;
@@ -32,11 +26,9 @@ function CreateEmployee({ saveData }) {
 
   //React Select Component
   const statesList = useSelector((store) => store.persistedReducers.states);
-  const departmentList = useSelector(
-    (store) => store.persistedReducers.departments
-  );
+
   const onSubmit = (data, e) => {
-    saveData(data);
+    // saveData(data);
     e.preventDefault();
     data.start_date = format(
       parseISO(data.start_date.toISOString()),
@@ -59,6 +51,10 @@ function CreateEmployee({ saveData }) {
       </MenuItem>
     );
   });
+
+  const departmentList = useSelector(
+    (store) => store.persistedReducers.departments
+  );
 
   const selectDepartmentList = departmentList?.map((department, index) => {
     return (
